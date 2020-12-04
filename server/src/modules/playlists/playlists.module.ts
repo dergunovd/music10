@@ -7,5 +7,6 @@ import { DeezerApiModule } from '../deezer-api';
   imports: [DeezerApiModule],
   providers: [PlaylistsService],
   controllers: [PlaylistsController],
+  exports: [PlaylistsService],
 })
 export class PlaylistsModule {}
