@@ -1,7 +1,7 @@
 import { Track } from './track.interface';
 
 export interface Playlist {
-  id: string;
+  id: number;
   name: string;
 
   getTracks(): Promise<Track[]>;
