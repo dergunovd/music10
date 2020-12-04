@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Playlist } from '../../interfaces';
 import { ApiContext } from '../../contexts/api.context';
 import { GameContext, Screen } from '../../contexts/game.context';
@@ -26,7 +26,7 @@ export const Playlists: React.FC = () => {
       <Row>
         {playlists.map((p) => (
           <Col key={p.id}>
-            <Card onClick={() => choosePlaylist(p.id)}>{p.name}</Card>
+            <Button onClick={() => choosePlaylist(p.id)}>{p.name}</Button>
           </Col>
         ))}
       </Row>
