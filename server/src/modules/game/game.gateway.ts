@@ -5,17 +5,22 @@ import {
   ConnectedSocket,
   OnGatewayDisconnect,
   OnGatewayConnection,
+  WebSocketServer,
 } from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
+
 import { GameService } from './game.service';
-import { Socket } from 'socket.io';
 import { PlaylistsService } from '../playlists/playlists.service';
 
-@WebSocketGateway()
+@WebSocketGateway(3001, { namespace: 'game' })
 export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private readonly gameService: GameService,
     private readonly playlistsService: PlaylistsService,
   ) {}
+
+  @WebSocketServer()
+  private server: Server;
 
   public handleConnection(socket: Socket) {
     this.gameService.addClient(socket.id);
@@ -31,12 +36,18 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() playlistId: string,
   ) {
     const playlist = await this.playlistsService.getPlaylist(playlistId);
-    return this.gameService.getClient(socket.id).setPlaylist(playlist);
+    socket.emit(
+      'playlist',
+      await this.gameService.getClient(socket.id).setPlaylist(playlist),
+    );
   }
 
   @SubscribeMessage('next')
   async getNextTracks(@ConnectedSocket() socket: Socket) {
-    return this.gameService.getClient(socket.id).next();
+    socket.emit(
+      'nextTracks',
+      await this.gameService.getClient(socket.id).next(),
+    );
   }
 
   @SubscribeMessage('chooseTrack')
@@ -44,6 +55,9 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() socket: Socket,
     @MessageBody() trackIndex: number,
   ) {
-    return this.gameService.getClient(socket.id).choose(trackIndex);
+    socket.emit(
+      'chooseResult',
+      await this.gameService.getClient(socket.id).choose(trackIndex),
+    );
   }
 }

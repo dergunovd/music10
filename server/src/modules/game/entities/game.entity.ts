@@ -17,6 +17,7 @@ export class Game {
   setPlaylist(playlist: Playlist) {
     this.playlist = playlist;
     this.result = new Result();
+    return playlist;
   }
 
   async next(): Promise<TracksForUser> {
