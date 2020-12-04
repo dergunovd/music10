@@ -10,6 +10,9 @@ import { PLAYLIST } from '../../../test/mocks/playlist';
 
 const MOCK_SOCKET: Socket = {
   id: '123456',
+  emit(event: string | symbol, ...args: any[]): boolean {
+    return true;
+  },
 } as Socket;
 
 describe('GameGateway', () => {
