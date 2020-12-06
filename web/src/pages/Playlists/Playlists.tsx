@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Button, CardDeck, Col, Container, Row } from 'react-bootstrap';
 import { Playlist } from '../../interfaces';
 import { ApiContext } from '../../contexts/api.context';
 import { GameContext, Screen } from '../../contexts/game.context';
@@ -24,11 +24,13 @@ export const Playlists: React.FC = () => {
     <Container>
       <h1>Выберите плейлист</h1>
       <Row>
-        {playlists.map((p) => (
-          <Col key={p.id}>
-            <Button onClick={() => choosePlaylist(p.id)}>{p.name}</Button>
-          </Col>
-        ))}
+        <CardDeck>
+          {playlists.map((p) => (
+            <Col key={p.id}>
+              <Button onClick={() => choosePlaylist(p.id)}>{p.name}</Button>
+            </Col>
+          ))}
+        </CardDeck>
       </Row>
     </Container>
   );

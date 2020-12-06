@@ -4,7 +4,8 @@ import { WsContext } from '../../contexts/ws.context';
 import { Tracks } from './Tracks/Tracks';
 import { WsAnswerNext } from '../../utils/ws';
 import { Track } from '../../interfaces';
-import { Music } from './Music';
+import { Music } from './Music/Music';
+import { Progress } from './Progress/Progress';
 
 export const Game: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -21,9 +22,11 @@ export const Game: React.FC = () => {
 
   return (
     <Container>
-      GAME
+      <h2>GAME</h2>
       <Music mp3={mp3} />
       <Tracks tracks={tracks} />
+      <Progress />
+
       <Row>
         <Col>
           <Button onClick={play}>{tracks.length ? 'Next' : 'Play'}</Button>

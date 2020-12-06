@@ -1,9 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
-import { Track } from '../../../interfaces';
+import { Card, CardDeck, Col, Row } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
+
+import { Track } from '../../../interfaces';
 import { WsContext } from '../../../contexts/ws.context';
 import { WsAnswerChoose } from '../../../utils/ws';
+import { GameContext } from '../../../contexts/game.context';
 
 interface Props {
   tracks: Track[];
@@ -12,6 +14,7 @@ interface Props {
 export const Tracks: React.FC<Props> = ({ tracks }) => {
   const [selected, setSelected] = useState(0);
   const [correct, setCorrect] = useState(0);
+  const { setResult } = useContext(GameContext);
   const ws = useContext(WsContext);
 
   useEffect(() => {
@@ -23,9 +26,10 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
     (trackId) => {
       setSelected(trackId);
       ws.choose(trackId).then((socket) =>
-        socket.once('chooseResult', (correctTrackId: WsAnswerChoose) =>
-          setCorrect(correctTrackId),
-        ),
+        socket.on('chooseResult', ({ correct, result }: WsAnswerChoose) => {
+          setCorrect(correct);
+          setResult(result);
+        }),
       );
     },
     [tracks, ws],
@@ -45,18 +49,21 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
 
   return (
     <Row>
-      {tracks.map((track) => (
-        <Col key={track.id}>
-          <Card
-            role="button"
-            onClick={() => !correct && select(track.id)}
-            bg={cardVariant(track.id)}
-          >
-            <Card.Body>{track.name}</Card.Body>
-            <Card.Footer>{track.author}</Card.Footer>
-          </Card>
-        </Col>
-      ))}
+      <Col>
+        <CardDeck>
+          {tracks.map((track) => (
+            <Card
+              key={track.id}
+              role="button"
+              onClick={() => !correct && select(track.id)}
+              bg={cardVariant(track.id)}
+            >
+              <Card.Body>{track.name}</Card.Body>
+              <Card.Footer>{track.author}</Card.Footer>
+            </Card>
+          ))}
+        </CardDeck>
+      </Col>
     </Row>
   );
 };

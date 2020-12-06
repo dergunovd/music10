@@ -2,6 +2,7 @@ import { Result } from './result.entity';
 import { Playlist, Track } from '../../../interfaces';
 import { randomSort } from '../../../utils';
 import { TracksForUser } from '../dtos/tracksForUser';
+import { ChooseResult } from '../dtos/chooseResult';
 
 export class Game {
   result: Result;
@@ -22,6 +23,7 @@ export class Game {
 
   async next(): Promise<TracksForUser> {
     await this.fillTracks();
+    await this.sortTracks();
     const correctTrack = this.tracks.shift();
     this.correctTrack = correctTrack;
 
@@ -33,14 +35,18 @@ export class Game {
     };
   }
 
-  choose(chooseTrackId: number): number {
+  choose(chooseTrackId: number): ChooseResult {
     this.result.updateProgress(chooseTrackId === this.correctTrack.id);
-    return this.correctTrack.id;
+    return { correct: this.correctTrack.id, result: this.result };
   }
 
   private async fillTracks() {
     while (this.tracks.length < 4) {
       this.tracks = randomSort([...(await this.playlist.getTracks())]);
     }
+  }
+
+  private async sortTracks() {
+    this.tracks = randomSort(this.tracks);
   }
 }
