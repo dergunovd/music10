@@ -3,12 +3,20 @@ import { Track } from '../interfaces';
 
 import { WS_HOST } from './variables';
 
+export interface Result {
+  progress: boolean[];
+  isEnd: boolean;
+}
+
 export interface WsAnswerNext {
   mp3: string;
   tracks: Track[];
 }
 
-export type WsAnswerChoose = number;
+export interface WsAnswerChoose {
+  correct: number;
+  result: Result;
+}
 
 export class WS {
   private socket;
@@ -19,15 +27,10 @@ export class WS {
     });
   }
 
-  setPlaylist = (playlistId: number) => {
+  setPlaylist = (playlistId: number) =>
     this.socket.emit('setPlaylist', playlistId);
-  };
 
-  next = async () => {
-    return this.socket.emit('next');
-  };
+  next = async () => this.socket.emit('next');
 
-  choose = async (trackId: number) => {
-    return this.socket.emit('choose', trackId);
-  };
+  choose = async (trackId: number) => this.socket.emit('choose', trackId);
 }

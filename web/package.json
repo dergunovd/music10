@@ -1,6 +1,7 @@
 {
-  "name": "web",
+  "name": "music10-web",
   "version": "0.1.0",
+  "author": "Dmitry Dergunov <dmitry@dergunov.net>",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -30,8 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cov": "react-scripts test --coverage",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

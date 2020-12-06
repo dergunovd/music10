@@ -41,6 +41,9 @@ describe('Game', () => {
     expect(gameInstance.result.progress[0]).toBe(
       gameInstance['correctTrack'].id === 3,
     );
-    expect(result).toEqual(gameInstance['correctTrack'].id);
+    expect(result).toEqual({
+      correct: gameInstance['correctTrack'].id,
+      result: { isEnd: false, progress: [false] },
+    });
   });
 });

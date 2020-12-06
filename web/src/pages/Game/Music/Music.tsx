@@ -12,6 +12,6 @@ export const Music: React.FC<Props> = ({ mp3 }) => {
     play();
     return stop;
   }, [play]);
-  console.log(mp3);
+
   return null;
 };

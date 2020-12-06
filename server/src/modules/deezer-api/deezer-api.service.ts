@@ -41,12 +41,14 @@ export class DeezerApiService implements MusicApi {
       .get(`/playlist/${playlistId}`)
       .toPromise()
       .then((r) =>
-        r.data.tracks.data.map((t) => ({
-          id: t.id,
-          name: t.title,
-          author: t.artist.name,
-          mp3: t.preview,
-        })),
+        r.data.tracks.data
+          .filter((t) => t.preview)
+          .map((t) => ({
+            id: t.id,
+            name: t.title,
+            author: t.artist.name,
+            mp3: t.preview,
+          })),
       );
   }
 

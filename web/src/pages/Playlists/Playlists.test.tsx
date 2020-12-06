@@ -34,12 +34,18 @@ describe('Playlists', () => {
 
   it('Should select playlist', async () => {
     const setScreen = jest.fn();
+    const setResult = jest.fn();
     act(() => {
       render(
         <ApiContext.Provider value={api}>
           <WsContext.Provider value={ws}>
             <GameContext.Provider
-              value={{ screen: Screen.PLAYLIST, setScreen }}
+              value={{
+                screen: Screen.PLAYLIST,
+                setScreen,
+                result: { progress: [], isEnd: false },
+                setResult,
+              }}
             >
               <Playlists />
             </GameContext.Provider>
