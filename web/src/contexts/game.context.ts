@@ -13,7 +13,5 @@ interface GameContext {
 
 export const GameContext = React.createContext<GameContext>({
   screen: Screen.PLAYLIST,
-  setScreen: (() => {
-    void 0;
-  }) as Dispatch<SetStateAction<Screen>>,
+  setScreen: {} as Dispatch<SetStateAction<Screen>>,
 });
