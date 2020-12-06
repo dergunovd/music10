@@ -12,8 +12,8 @@ export class Api implements IApi {
     });
   }
 
-  getPlaylists = (query: string) =>
+  getPlaylists = (query?: string) =>
     this.axiosInstance
-      .get(`playlists?query=${query}`)
-      .then((data) => data.data);
+      .get(`playlists${query ? `?query=${query}` : ''}`)
+      .then(({ data }) => data);
 }

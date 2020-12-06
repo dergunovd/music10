@@ -71,7 +71,7 @@ describe('GameGateway', () => {
     expect(game.next).toHaveBeenCalledWith();
   });
 
-  it('should chooseTrack', async () => {
+  it('should choose', async () => {
     await gateway.chooseTrack(MOCK_SOCKET, 2);
     expect(game.choose).toHaveBeenCalledTimes(1);
     expect(game.choose).toHaveBeenCalledWith(2);

@@ -50,7 +50,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
     );
   }
 
-  @SubscribeMessage('chooseTrack')
+  @SubscribeMessage('choose')
   async chooseTrack(
     @ConnectedSocket() socket: Socket,
     @MessageBody() trackIndex: number,

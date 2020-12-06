@@ -12,7 +12,7 @@ export const Playlists: React.FC = () => {
   const { setScreen } = useContext(GameContext);
 
   useEffect(() => {
-    api?.getPlaylists('').then((playlists) => setPlaylists(playlists));
+    api?.getPlaylists().then((playlists) => setPlaylists(playlists));
   }, []);
 
   const choosePlaylist = useCallback(async (playlistId) => {
