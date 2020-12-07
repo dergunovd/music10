@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { WsContext } from "../../contexts/ws.context";
 import { Tracks } from "./Tracks/Tracks";
 import { WsAnswerNext } from "../../utils/ws";
@@ -22,7 +22,7 @@ export const Game: React.FC = () => {
 
   return (
     <View>
-      <h2>GAME</h2>
+      <Text>GAME</Text>
       <Music mp3={mp3} />
       <Tracks tracks={tracks} />
       <Progress />

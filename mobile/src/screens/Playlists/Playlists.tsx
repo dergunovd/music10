@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Button, View } from "react-native";
+import { Button, Text, View } from "react-native";
 
 import { Playlist } from "../../interfaces";
 import { ApiContext } from "../../contexts/api.context";
@@ -25,7 +25,7 @@ export const Playlists: React.FC = () => {
 
   return (
     <View>
-      <h1>Выберите плейлист</h1>
+      <Text>Выберите плейлист</Text>
       <View>
         <View>
           {playlists.map((p) => (
