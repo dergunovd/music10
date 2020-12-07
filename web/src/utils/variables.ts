@@ -1,3 +1,4 @@
-export const WS_HOST = process.env.REACT_APP_WS_HOST || 'ws://127.0.0.1:3001';
+export const WS_HOST =
+  process.env.REACT_APP_WS_HOST || 'ws://ws.music.dergunov.net';
 export const API_HOST =
-  process.env.REACT_APP_API_HOST || 'http://127.0.0.1:3000';
+  process.env.REACT_APP_API_HOST || 'http://api.music.dergunov.net';
