@@ -12,7 +12,7 @@ import { Server, Socket } from 'socket.io';
 import { GameService } from './game.service';
 import { PlaylistsService } from '../playlists/playlists.service';
 
-@WebSocketGateway(3000, { namespace: 'game' })
+@WebSocketGateway(3001, { namespace: 'game' })
 export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private readonly gameService: GameService,

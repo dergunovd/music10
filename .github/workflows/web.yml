@@ -35,10 +35,8 @@ jobs:
         run: cd web && npm build
         env:
           REACT_APP_SERVER_HOST: ${{ secrets.REACT_APP_SERVER_HOST }}
-      - name: Store  code coverage results and dist
+      - name: Store dist
         uses: actions/upload-artifact@v2
         with:
-          - name: dist
-            path: web/build
-          - name: code-coverage-report
-            path: web/coverage
+          name: dist
+          path: web/build
