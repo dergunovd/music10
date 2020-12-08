@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Button, View, Text } from "react-native";
+import { View } from "react-native";
 
 import { Track } from "../../../interfaces";
 import { WsContext } from "../../../contexts/ws.context";
 import { WsAnswerChoose } from "../../../utils/ws";
 import { GameContext } from "../../../contexts/game.context";
+import { Caption, Card, Paragraph } from "react-native-paper";
 
 interface Props {
   tracks: Track[];
@@ -48,16 +49,12 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
 
   return (
     <View>
-      <View>
-        <View>
-          {tracks.map((track) => (
-            <Text key={track.id} onPress={() => !correct && select(track.id)}>
-              <View>{track.name}</View>
-              <View>{track.author}</View>
-            </Text>
-          ))}
-        </View>
-      </View>
+      {tracks.map((track) => (
+        <Card key={track.id} onPress={() => !correct && select(track.id)}>
+          <Paragraph>{track.name}</Paragraph>
+          <Caption>{track.author}</Caption>
+        </Card>
+      ))}
     </View>
   );
 };

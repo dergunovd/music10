@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useMemo, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
 import { Result, WS } from "./src/utils/ws";
 import { Api } from "./src/utils/api";
 import { ApiContext } from "./src/contexts/api.context";
@@ -18,14 +18,18 @@ export default function App() {
   const ws = useMemo(() => new WS(), []);
 
   return (
-    <ApiContext.Provider value={api}>
-      <WsContext.Provider value={ws}>
-        <GameContext.Provider value={{ screen, setScreen, result, setResult }}>
-          {screen === Screen.PLAYLIST && <Playlists />}
-          {screen === Screen.GAME && <Game />}
-          {screen === Screen.RESULT && <ResultScreen />}
-        </GameContext.Provider>
-      </WsContext.Provider>
-    </ApiContext.Provider>
+    <PaperProvider>
+      <ApiContext.Provider value={api}>
+        <WsContext.Provider value={ws}>
+          <GameContext.Provider
+            value={{ screen, setScreen, result, setResult }}
+          >
+            {screen === Screen.PLAYLIST && <Playlists />}
+            {screen === Screen.GAME && <Game />}
+            {screen === Screen.RESULT && <ResultScreen />}
+          </GameContext.Provider>
+        </WsContext.Provider>
+      </ApiContext.Provider>
+    </PaperProvider>
   );
 }

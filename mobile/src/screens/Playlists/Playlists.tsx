@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { View, ScrollView } from "react-native";
 
 import { Playlist } from "../../interfaces";
 import { ApiContext } from "../../contexts/api.context";
 import { GameContext, Screen } from "../../contexts/game.context";
 import { WsContext } from "../../contexts/ws.context";
+import { Button, Divider, Title } from "react-native-paper";
 
 export const Playlists: React.FC = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
@@ -24,17 +25,18 @@ export const Playlists: React.FC = () => {
   }, []);
 
   return (
-    <View>
-      <Text>Выберите плейлист</Text>
+    <ScrollView>
+      <Title>Выберите плейлист</Title>
       <View>
-        <View>
-          {playlists.map((p) => (
-            <View key={p.id}>
-              <Button title={p.name} onPress={() => choosePlaylist(p.id)} />
-            </View>
-          ))}
-        </View>
+        {playlists.map((p, index) => (
+          <View key={p.id}>
+            {index ? <Divider /> : null}
+            <Button mode="contained" onPress={() => choosePlaylist(p.id)}>
+              {p.name}
+            </Button>
+          </View>
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };

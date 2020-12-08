@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { GameContext, Screen } from "../../contexts/game.context";
-import { Text, View, Button } from "react-native";
+import { View } from "react-native";
+import { Paragraph, Title, Button } from "react-native-paper";
 
 export const Result: React.FC = () => {
   const { result, setScreen } = useContext(GameContext);
 
   return (
     <View>
-      <Text>Результаты</Text>
-      <Text>
+      <Title>Результаты</Title>
+      <Paragraph>
         Вы угадали {result.progress.filter((r) => r).length} из{" "}
         {result.progress.length} треков
-      </Text>
-      <Button title="Играть снова" onPress={() => setScreen(Screen.PLAYLIST)} />
+      </Paragraph>
+      <Button onPress={() => setScreen(Screen.PLAYLIST)}>Играть снова</Button>
     </View>
   );
 };

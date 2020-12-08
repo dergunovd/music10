@@ -1,11 +1,12 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { View } from "react-native";
 import { WsContext } from "../../contexts/ws.context";
 import { Tracks } from "./Tracks/Tracks";
 import { WsAnswerNext } from "../../utils/ws";
 import { Track } from "../../interfaces";
 import { Music } from "./Music/Music";
 import { Progress } from "./Progress/Progress";
+import { Button, Title } from "react-native-paper";
 
 export const Game: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -22,19 +23,12 @@ export const Game: React.FC = () => {
 
   return (
     <View>
-      <Text>GAME</Text>
+      <Title>GAME</Title>
       <Music mp3={mp3} />
       <Tracks tracks={tracks} />
       <Progress />
 
-      <View>
-        <View>
-          <Button
-            title={tracks.length ? "Next" : "Play"}
-            onPress={play}
-          ></Button>
-        </View>
-      </View>
+      <Button onPress={play}>{tracks.length ? "Next" : "Play"}</Button>
     </View>
   );
 };
