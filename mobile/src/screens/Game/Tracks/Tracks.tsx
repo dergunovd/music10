@@ -1,20 +1,20 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { View } from "react-native";
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {View} from 'react-native';
 
-import { Track } from "../../../interfaces";
-import { WsContext } from "../../../contexts/ws.context";
-import { WsAnswerChoose } from "../../../utils/ws";
-import { GameContext } from "../../../contexts/game.context";
-import { Caption, Card, Paragraph } from "react-native-paper";
+import {Track} from '../../../interfaces';
+import {WsContext} from '../../../contexts/ws.context';
+import {WsAnswerChoose} from '../../../utils/ws';
+import {GameContext} from '../../../contexts/game.context';
+import {Caption, Card, Paragraph} from 'react-native-paper';
 
 interface Props {
   tracks: Track[];
 }
 
-export const Tracks: React.FC<Props> = ({ tracks }) => {
+export const Tracks: React.FC<Props> = ({tracks}) => {
   const [selected, setSelected] = useState(0);
   const [correct, setCorrect] = useState(0);
-  const { setResult } = useContext(GameContext);
+  const {setResult} = useContext(GameContext);
   const ws = useContext(WsContext);
 
   useEffect(() => {
@@ -26,25 +26,25 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
     (trackId) => {
       setSelected(trackId);
       ws.choose(trackId).then((socket) =>
-        socket.on("chooseResult", ({ correct, result }: WsAnswerChoose) => {
+        socket.once('chooseResult', ({correct, result}: WsAnswerChoose) => {
           setCorrect(correct);
           setResult(result);
-        })
+        }),
       );
     },
-    [tracks, ws]
+    [tracks, ws],
   );
 
   const cardVariant = useCallback(
     (trackId: number): string => {
       if (correct) {
-        if (correct === trackId) return "success";
-        if (selected === trackId) return "danger";
+        if (correct === trackId) return 'success';
+        if (selected === trackId) return 'danger';
       }
-      if (selected === trackId) return "info";
-      return "light";
+      if (selected === trackId) return 'info';
+      return 'light';
     },
-    [selected, correct]
+    [selected, correct],
   );
 
   return (
