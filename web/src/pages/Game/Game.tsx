@@ -27,7 +27,6 @@ export const Game: React.FC = () => {
       <Music mp3={mp3} />
       <Tracks tracks={tracks} />
       <Progress />
-      {mp3}
       <Button onClick={play}>{tracks.length ? 'Дальше' : 'Поехали'}</Button>
     </>
   );

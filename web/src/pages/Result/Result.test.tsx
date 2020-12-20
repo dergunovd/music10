@@ -48,5 +48,7 @@ describe('Result', () => {
     screen.getByRole('button').click();
     expect(setScreen).toHaveBeenCalledTimes(1);
     expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
+    expect(setResult).toHaveBeenCalledTimes(1);
+    expect(setResult).toHaveBeenCalledWith({ isEnd: false, progress: [] });
   });
 });

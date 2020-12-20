@@ -38,7 +38,7 @@ export const StyledProgressBar = styled.ul<Omit<ProgressBarProps, 'progress'>>`
 `;
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
-  progress,
+  progress = [],
   ...props
 }) => (
   <StyledProgressBar {...props} role="progressbar">
@@ -50,10 +50,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         }
       />
     ))}
-    {progress.length < TRACKS_PER_ROUND && (
+    {progress.length < TRACKS_PER_ROUND ? (
       <ProgressBarItem variant={ProgressBarItemVariant.Current} />
-    )}
-    {new Array(TRACKS_PER_ROUND - progress.length - 1)
+    ) : null}
+    {new Array(Math.max(TRACKS_PER_ROUND - progress.length - 1, 0))
       .fill(true)
       .map((_, index) => (
         <ProgressBarItem key={index} variant={ProgressBarItemVariant.Default} />

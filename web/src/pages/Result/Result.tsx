@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import { GameContext, Screen } from '../../contexts';
 import { Button, Header } from '../../components';
 
 export const Result: React.FC = () => {
-  const { result, setScreen } = useContext(GameContext);
+  const { result, setScreen, setResult } = useContext(GameContext);
+
+  const replay = useCallback(() => {
+    setResult({ isEnd: false, progress: [] });
+    setScreen(Screen.PLAYLIST);
+  }, [setResult, setScreen]);
 
   return (
     <>
@@ -13,7 +18,7 @@ export const Result: React.FC = () => {
         Вы угадали {result.progress.filter((r) => r).length} из{' '}
         {result.progress.length} треков
       </h4>
-      <Button onClick={() => setScreen(Screen.PLAYLIST)}>Играть снова</Button>
+      <Button onClick={replay}>Играть снова</Button>
     </>
   );
 };
