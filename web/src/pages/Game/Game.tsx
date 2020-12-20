@@ -28,7 +28,7 @@ export const Game: React.FC = () => {
       <Tracks tracks={tracks} />
       <Progress />
       {mp3}
-      <Button onClick={play}>{tracks.length ? 'Next' : 'Play'}</Button>
+      <Button onClick={play}>{tracks.length ? 'Дальше' : 'Поехали'}</Button>
     </>
   );
 };
