@@ -1,9 +1,8 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Button, CardDeck, Col, Container, Row } from 'react-bootstrap';
+
 import { Playlist } from '../../interfaces';
-import { ApiContext } from '../../contexts/api.context';
-import { GameContext, Screen } from '../../contexts/game.context';
-import { WsContext } from '../../contexts/ws.context';
+import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
+import { Button, Header, PlaylistGrid } from '../../components';
 
 export const Playlists: React.FC = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
@@ -21,17 +20,15 @@ export const Playlists: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      <h1>Выберите плейлист</h1>
-      <Row>
-        <CardDeck>
-          {playlists.map((p) => (
-            <Col key={p.id}>
-              <Button onClick={() => choosePlaylist(p.id)}>{p.name}</Button>
-            </Col>
-          ))}
-        </CardDeck>
-      </Row>
-    </Container>
+    <>
+      <Header text="Выберите плейлист" />
+      <PlaylistGrid>
+        {playlists.map((p) => (
+          <Button key={p.id} onClick={() => choosePlaylist(p.id)}>
+            {p.name}
+          </Button>
+        ))}
+      </PlaylistGrid>
+    </>
   );
 };

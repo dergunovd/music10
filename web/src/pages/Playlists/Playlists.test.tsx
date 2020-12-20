@@ -3,12 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import { Playlists } from './Playlists';
-import { Api } from '../../utils/api';
-import { ApiContext } from '../../contexts/api.context';
-import { PLAYLISTS } from '../../mocks/playlists';
-import { GameContext, Screen } from '../../contexts/game.context';
-import { WS } from '../../utils/ws';
-import { WsContext } from '../../contexts/ws.context';
+import { Api, WS } from '../../utils';
+import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
+import { PLAYLISTS } from '../../mocks';
 
 describe('Playlists', () => {
   let api = new Api();

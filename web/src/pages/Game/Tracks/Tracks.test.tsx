@@ -2,11 +2,10 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import { WS } from '../../../utils/ws';
-import { WS_ANSWER_NEXT } from '../../../mocks/tracks';
-import { WsContext } from '../../../contexts/ws.context';
+import { WS, WS_HOST } from '../../../utils';
+import { WS_ANSWER_NEXT } from '../../../mocks';
+import { WsContext } from '../../../contexts';
 import { Tracks } from './Tracks';
-import { WS_HOST } from '../../../utils/variables';
 
 describe('Tracks', () => {
   const ws = new WS();

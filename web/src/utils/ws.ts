@@ -19,7 +19,7 @@ export interface WsAnswerChoose {
 }
 
 export class WS {
-  private socket;
+  private socket: SocketIOClient.Socket;
 
   constructor() {
     this.socket = io(`${WS_HOST}/game`, {

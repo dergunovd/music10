@@ -1,12 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { ApiContext } from './contexts/api.context';
-import { GameContext, Screen } from './contexts/game.context';
-import { Playlists } from './pages/Playlists/Playlists';
-import { Api } from './utils/api';
-import { Game } from './pages/Game/Game';
-import { Result, WS } from './utils/ws';
-import { WsContext } from './contexts/ws.context';
-import { Result as ResultScreen } from './pages/Result/Result';
+
+import { ApiContext, GameContext, Screen, WsContext } from './contexts';
+import { Game, Playlists, Result as ResultScreen } from './pages';
+import { Api, Result, WS } from './utils';
 
 const App = () => {
   const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);

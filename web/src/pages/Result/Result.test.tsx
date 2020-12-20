@@ -2,9 +2,9 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { GameContext, Screen } from '../../contexts/game.context';
+import { GameContext, Screen } from '../../contexts';
+import { PROGRESS } from '../../mocks';
 import { Result } from './Result';
-import { PROGRESS } from '../../mocks/progress';
 
 describe('Result', () => {
   const setScreen = jest.fn();

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { Col, ProgressBar, Row } from 'react-bootstrap';
-import { GameContext, Screen } from '../../../contexts/game.context';
 
-const TRACKS_PER_ROUND = 10;
+import { GameContext, Screen } from '../../../contexts';
+import { ProgressBar } from '../../../components';
 
 export const Progress: React.FC = () => {
   const { result, setScreen } = useContext(GameContext);
@@ -11,19 +10,5 @@ export const Progress: React.FC = () => {
     if (result.isEnd) setScreen(Screen.RESULT);
   });
 
-  return (
-    <Row>
-      <Col>
-        <ProgressBar>
-          {result.progress?.map((r, index) => (
-            <ProgressBar
-              variant={r ? 'success' : 'danger'}
-              now={100 / TRACKS_PER_ROUND}
-              key={index}
-            />
-          ))}
-        </ProgressBar>
-      </Col>
-    </Row>
-  );
+  return <ProgressBar progress={result.progress} />;
 };

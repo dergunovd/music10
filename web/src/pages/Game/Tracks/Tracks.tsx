@@ -1,14 +1,12 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Card, CardDeck, Col, Row } from 'react-bootstrap';
-import { Variant } from 'react-bootstrap/types';
 
-import { Track } from '../../../interfaces';
-import { WsContext } from '../../../contexts/ws.context';
-import { WsAnswerChoose } from '../../../utils/ws';
-import { GameContext } from '../../../contexts/game.context';
+import { Track as TrackInterface } from '../../../interfaces';
+import { GameContext, WsContext } from '../../../contexts';
+import { WsAnswerChoose } from '../../../utils';
+import { Track, TrackCardType, TracksGrid } from '../../../components';
 
 interface Props {
-  tracks: Track[];
+  tracks: TrackInterface[];
 }
 
 export const Tracks: React.FC<Props> = ({ tracks }) => {
@@ -36,34 +34,27 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
   );
 
   const cardVariant = useCallback(
-    (trackId: number): Variant => {
+    (trackId: number): TrackCardType | undefined => {
       if (correct) {
         if (correct === trackId) return 'success';
-        if (selected === trackId) return 'danger';
+        if (selected === trackId) return 'wrong';
       }
-      if (selected === trackId) return 'info';
-      return 'light';
+      return undefined;
     },
     [selected, correct],
   );
 
   return (
-    <Row>
-      <Col>
-        <CardDeck>
-          {tracks.map((track) => (
-            <Card
-              key={track.id}
-              role="button"
-              onClick={() => !correct && select(track.id)}
-              bg={cardVariant(track.id)}
-            >
-              <Card.Body>{track.name}</Card.Body>
-              <Card.Footer>{track.author}</Card.Footer>
-            </Card>
-          ))}
-        </CardDeck>
-      </Col>
-    </Row>
+    <TracksGrid>
+      {tracks.map(({ name, id, author }) => (
+        <Track
+          key={id}
+          onClick={() => !correct && select(id)}
+          track={name}
+          author={author}
+          type={cardVariant(id)}
+        />
+      ))}
+    </TracksGrid>
   );
 };

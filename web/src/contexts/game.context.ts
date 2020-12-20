@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Result } from '../utils/ws';
+import { Result } from '../utils';
 
 export enum Screen {
   PLAYLIST,

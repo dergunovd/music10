@@ -1,4 +1,4 @@
-import { WsAnswerNext } from '../utils/ws';
+import { WsAnswerNext } from '../utils';
 
 export const WS_ANSWER_NEXT: WsAnswerNext = {
   mp3: 'https://some.site/file.mp3',
