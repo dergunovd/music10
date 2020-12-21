@@ -32,6 +32,7 @@ describe('Playlists', () => {
   it('Should select playlist', async () => {
     const setScreen = jest.fn();
     const setResult = jest.fn();
+    const setGameState = jest.fn();
     act(() => {
       render(
         <ApiContext.Provider value={api}>
@@ -42,6 +43,8 @@ describe('Playlists', () => {
                 setScreen,
                 result: { progress: [], isEnd: false },
                 setResult,
+                gameState: { isSelectTrack: false, playlistName: '' },
+                setGameState,
               }}
             >
               <Playlists />

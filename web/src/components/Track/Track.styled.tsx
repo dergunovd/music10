@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import { accent, danger, main } from '../../utils';
 import { css } from '@emotion/react';
-import { TrackCardProps } from './Track';
+import { TrackCardProps, TrackCardVariant } from './Track';
 
 export const StyledTrack = styled.div<TrackCardProps>`
-  padding: 24px 104px;
-  font-size: 24px;
+  padding: 2rem 8rem;
+  width: 100%;
+  font-size: 2rem;
   font-weight: 700;
   position: relative;
   text-align: center;
@@ -16,7 +17,7 @@ export const StyledTrack = styled.div<TrackCardProps>`
     border-color: ${accent};
   }
   ${({ type }) =>
-    type === 'success'
+    type === TrackCardVariant.Success
       ? css`
           border: 2px solid ${accent};
           color: ${accent};
@@ -24,7 +25,7 @@ export const StyledTrack = styled.div<TrackCardProps>`
             border-color: ${main};
           }
         `
-      : type === 'wrong'
+      : type === TrackCardVariant.Wrong
       ? css`
           border: 2px solid ${danger};
           color: ${danger};

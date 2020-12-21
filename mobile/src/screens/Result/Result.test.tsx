@@ -1,52 +1,55 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { render, screen, waitFor } from '@testing-library/react';
+import React from "react";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
 
-import { GameContext, Screen } from '../../contexts/game.context';
-import { Result } from './Result';
-import { PROGRESS } from '../../mocks/progress';
+import { GameContext, Screen } from "../../contexts";
+import { Result } from "./Result";
+import { PROGRESS } from "../../mocks";
 
-describe('Result', () => {
+describe("Result", () => {
   const setScreen = jest.fn();
   const setResult = jest.fn();
+  const setGameState = jest.fn();
 
-  it('Should render', async () => {
-    act(() => {
-      render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-          }}
-        >
-          <Result />
-        </GameContext.Provider>,
-      );
-    });
+  it("Should render", async () => {
+    const screen = render(
+      <GameContext.Provider
+        value={{
+          screen: Screen.RESULT,
+          setScreen,
+          result: { progress: PROGRESS, isEnd: true },
+          setResult,
+          gameState: { isSelectTrack: false, playlistName: "" },
+          setGameState,
+        }}
+      >
+        <Result />
+      </GameContext.Provider>
+    );
+
     await waitFor(() =>
-      expect(screen.getAllByText('Вы угадали 5 из 8 треков')).toBeDefined(),
+      expect(screen.getAllByText("Вы угадали 5 из 8 треков")).toBeDefined()
     );
   });
 
-  it('Should game again', async () => {
-    act(() => {
-      render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-          }}
-        >
-          <Result />
-        </GameContext.Provider>,
-      );
+  it("Should game again", async () => {
+    const screen = render(
+      <GameContext.Provider
+        value={{
+          screen: Screen.RESULT,
+          setScreen,
+          result: { progress: PROGRESS, isEnd: true },
+          setResult,
+          gameState: { isSelectTrack: false, playlistName: "" },
+          setGameState,
+        }}
+      >
+        <Result />
+      </GameContext.Provider>
+    );
+    await waitFor(() => {
+      fireEvent.press(screen.getByRole("button"));
+      expect(setScreen).toHaveBeenCalledTimes(1);
+      expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
     });
-    screen.getByRole('button').click();
-    expect(setScreen).toHaveBeenCalledTimes(1);
-    expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
   });
 });

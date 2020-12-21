@@ -1,20 +1,17 @@
-import React, {useEffect} from 'react';
-import Sound from 'react-native-sound';
+import React, { useEffect } from "react";
+import useSound from "react-native-use-sound";
 
 interface Props {
   mp3: string;
 }
 
-export const Music: React.FC<Props> = ({mp3}) => {
+export const Music: React.FC<Props> = ({ mp3 }) => {
+  const [play, , stop] = useSound(mp3);
+
   useEffect(() => {
-    const player = new Sound(mp3, Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-        return;
-      }
-      player.play();
-    });
-    return () => player.stop();
-  }, [mp3]);
+    play();
+    return stop;
+  }, [play]);
+
   return null;
 };

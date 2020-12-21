@@ -9,8 +9,8 @@ export interface ButtonProps
 }
 
 export const Button = styled.button<ButtonProps>`
-  padding: 24px 104px;
-  font-size: 24px;
+  padding: 2rem 8rem;
+  font-size: 2rem;
   font-weight: 700;
   position: relative;
   text-align: center;
@@ -25,8 +25,8 @@ export const Button = styled.button<ButtonProps>`
           &:hover:before {
              content: '';
              position: absolute;
-             top: 16px;
-             left: 16px;
+             top: 1.2rem;
+             left: 1.2rem;
              display: block;
              width: 100%;
              height: 100%;
@@ -44,4 +44,15 @@ export const Button = styled.button<ButtonProps>`
             border-color: ${accent};
           }
         `}
+  &:disabled {
+    opacity: 0.7;
+    border: 2px solid ${main};
+    color: ${main};
+    background: transparent;
+    cursor: not-allowed;
+
+    &:hover:before {
+      display: none;
+    }
+  }
 `;

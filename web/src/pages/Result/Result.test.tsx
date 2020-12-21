@@ -2,27 +2,33 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { GameContext, Screen } from '../../contexts';
+import { GameContext, Screen, WsContext } from '../../contexts';
 import { PROGRESS } from '../../mocks';
 import { Result } from './Result';
+import { WS } from '../../utils';
 
 describe('Result', () => {
+  const ws = new WS();
   const setScreen = jest.fn();
   const setResult = jest.fn();
-
+  const setGameState = jest.fn();
   it('Should render', async () => {
     act(() => {
       render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-          }}
-        >
-          <Result />
-        </GameContext.Provider>,
+        <WsContext.Provider value={ws}>
+          <GameContext.Provider
+            value={{
+              screen: Screen.PLAYLIST,
+              setScreen,
+              result: { progress: PROGRESS, isEnd: true },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: '' },
+              setGameState,
+            }}
+          >
+            <Result />
+          </GameContext.Provider>
+        </WsContext.Provider>,
       );
     });
     await waitFor(() =>
@@ -33,16 +39,20 @@ describe('Result', () => {
   it('Should game again', async () => {
     act(() => {
       render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-          }}
-        >
-          <Result />
-        </GameContext.Provider>,
+        <WsContext.Provider value={ws}>
+          <GameContext.Provider
+            value={{
+              screen: Screen.RESULT,
+              setScreen,
+              result: { progress: PROGRESS, isEnd: true },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: '' },
+              setGameState,
+            }}
+          >
+            <Result />
+          </GameContext.Provider>
+        </WsContext.Provider>,
       );
     });
     screen.getByRole('button').click();

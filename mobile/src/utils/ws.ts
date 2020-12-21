@@ -19,7 +19,7 @@ export interface WsAnswerChoose {
 }
 
 export class WS {
-  private socket;
+  private socket: SocketIOClient.Socket;
 
   constructor() {
     this.socket = io(`${WS_HOST}/game`, {
@@ -33,4 +33,9 @@ export class WS {
   next = async () => this.socket.emit('next');
 
   choose = async (trackId: number) => this.socket.emit('choose', trackId);
+
+  reconnect = async () => {
+    await this.socket.disconnect();
+    this.socket.connect();
+  };
 }

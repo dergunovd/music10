@@ -8,7 +8,7 @@ import {
 } from './ProgressBarItem';
 
 export default {
-  title: 'Components/ProgressBarItem',
+  title: 'Components/ProgressBar/ProgressBarItem',
   component: ProgressBarItem,
 } as Meta;
 

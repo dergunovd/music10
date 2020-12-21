@@ -2,10 +2,14 @@ import React from 'react';
 
 import { StyledTrack, TrackAuthor, TrackName } from './Track.styled';
 
-export type TrackCardType = 'success' | 'wrong';
+export enum TrackCardVariant {
+  Success,
+  Wrong,
+  Default,
+}
 
 export interface TrackCardProps extends React.HTMLAttributes<HTMLElement> {
-  type?: TrackCardType;
+  type: TrackCardVariant;
 }
 
 export interface TrackProps extends TrackCardProps {

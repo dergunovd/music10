@@ -31,7 +31,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "deploy": "scp -r build/* dergunov@dplnk.ru:/home/dergunov/music/web/build\n"
+    "deploy": "scp -r build/* dergunov@dplnk.ru:/home/dergunov/music/web/build"
   },
   "eslintConfig": {
     "extends": [
