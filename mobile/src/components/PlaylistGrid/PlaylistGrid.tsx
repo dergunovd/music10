@@ -1,9 +1,8 @@
 import styled from "@emotion/native";
 
-export const PlaylistGrid = styled.View`
+export const PlaylistGrid = styled.ScrollView`
   display: flex;
   flex-direction: column;
   margin: auto;
   align-content: center;
-  justify-content: center;
 `;

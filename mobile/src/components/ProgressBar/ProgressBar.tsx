@@ -12,29 +12,12 @@ export interface ProgressBarProps {
 export const StyledProgressBar = styled.View<
   Omit<ProgressBarProps, "progress">
 >`
-  margin: 0 auto;
-  padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: ${({ vertical }) => (vertical ? "column" : "row")};
+  flex-direction: row;
+  padding: 0;
   [data-variant="${ProgressBarItemVariant.Current}"] {
-    ${({ vertical }) =>
-      vertical
-        ? css`
-            height: 6rem;
-          `
-        : css`
-            width: 6rem;
-          `};
-  }
-  li + li {
-    ${({ vertical }) =>
-      vertical
-        ? css`
-            margin-top: 2rem;
-          `
-        : css`
-            margin-left: 2rem;
-          `};
+    width: 36px;
   }
 `;
 

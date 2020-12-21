@@ -13,7 +13,7 @@ export const Default = Template.bind({
   text: 'Выберите плейлист',
   nav: [<a href="#">Link 1</a>, <a href="#">Link 2</a>],
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Default.args = {
   text: 'Выберите плейлист',

@@ -13,7 +13,7 @@ export const Result: React.FC = () => {
     setResult({ isEnd: false, progress: [] });
     setScreen(Screen.PLAYLIST);
     await ws.reconnect();
-  }, [setResult, setScreen]);
+  }, [setResult, setScreen, ws]);
 
   return (
     <>

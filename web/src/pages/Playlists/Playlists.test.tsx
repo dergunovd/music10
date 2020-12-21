@@ -8,8 +8,8 @@ import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
 import { PLAYLISTS } from '../../mocks';
 
 describe('Playlists', () => {
-  let api = new Api();
-  let ws = new WS();
+  const api = new Api();
+  const ws = new WS();
 
   beforeEach(async () => {
     jest.spyOn(api, 'getPlaylists').mockImplementation(async () => PLAYLISTS);

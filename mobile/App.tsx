@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Api, Result, WS } from "./src/utils";
+import { Api, bg, Result, WS } from "./src/utils";
 import {
   ApiContext,
   GameContext,
@@ -8,6 +8,8 @@ import {
   WsContext,
 } from "./src/contexts";
 import { Playlists, Game, Result as ResultScreen } from "./src/screens";
+import { View } from "react-native";
+import { css } from "@emotion/native";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);
@@ -18,23 +20,30 @@ export default function App() {
   const ws = useMemo(() => new WS(), []);
 
   return (
-    <ApiContext.Provider value={api}>
-      <WsContext.Provider value={ws}>
-        <GameContext.Provider
-          value={{
-            screen,
-            setScreen,
-            result,
-            setResult,
-            gameState,
-            setGameState,
-          }}
-        >
-          {screen === Screen.PLAYLIST && <Playlists />}
-          {screen === Screen.GAME && <Game />}
-          {screen === Screen.RESULT && <ResultScreen />}
-        </GameContext.Provider>
-      </WsContext.Provider>
-    </ApiContext.Provider>
+    <View
+      style={css`
+        background: ${bg};
+        height: 100%;
+      `}
+    >
+      <ApiContext.Provider value={api}>
+        <WsContext.Provider value={ws}>
+          <GameContext.Provider
+            value={{
+              screen,
+              setScreen,
+              result,
+              setResult,
+              gameState,
+              setGameState,
+            }}
+          >
+            {screen === Screen.PLAYLIST && <Playlists />}
+            {screen === Screen.GAME && <Game />}
+            {screen === Screen.RESULT && <ResultScreen />}
+          </GameContext.Provider>
+        </WsContext.Provider>
+      </ApiContext.Provider>
+    </View>
   );
 }

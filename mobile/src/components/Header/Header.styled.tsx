@@ -7,13 +7,15 @@ export const StyledHeader = styled.View`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 3.5rem;
-  margin-bottom: 3.5rem;
+  padding-top: 42px;
+  margin-bottom: 42px;
 `;
 
-export const HeaderLogo = styled.Text`
-  padding: 2rem 5rem;
+export const HeaderLogo = styled.View`
+  padding: 24px 80px;
   font-size: 24px;
+  display: flex;
+  flex-direction: column;
   background: ${accent};
   color: ${bg};
   font-weight: 700;
@@ -28,6 +30,6 @@ export const HeaderNav = styled.View`
   text-align: right;
   color: ${main};
   & > * + * {
-    margin-left: 2rem;
+    margin-left: 24px;
   }
 `;

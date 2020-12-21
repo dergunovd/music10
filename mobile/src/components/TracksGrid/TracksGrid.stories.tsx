@@ -1,8 +1,7 @@
 import React from "react";
 
 import { TracksGrid } from "./TracksGrid";
-import { Track } from "../Track";
-import { TrackCardVariant } from "../Track/Track.types";
+import { Track, TrackCardVariant } from "../Track";
 
 export default {
   title: "Components/TracksGrid",

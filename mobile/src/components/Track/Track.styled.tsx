@@ -3,8 +3,8 @@ import styled, { css } from "@emotion/native";
 import { accent, danger, main } from "../../utils";
 import { TrackCardProps, TrackCardVariant } from "./Track.types";
 
-export const StyledTrack = styled.View<TrackCardProps>`
-  padding: 2rem 8rem;
+export const StyledTrack = styled.Pressable<TrackCardProps>`
+  padding: 24px 96px;
   width: 100%;
   font-size: 24px;
   font-weight: 700;

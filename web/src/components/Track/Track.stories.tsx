@@ -15,7 +15,7 @@ export const Default = Template.bind({
   author: 'Centr',
   track: 'Город Дорог',
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Default.args = {
   type: TrackCardVariant.Default,
@@ -28,7 +28,7 @@ export const Success = Template.bind({
   author: 'Centr',
   track: 'Город Дорог',
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Success.args = {
   type: TrackCardVariant.Success,
@@ -41,7 +41,7 @@ export const Wrong = Template.bind({
   author: 'Centr',
   track: 'Город Дорог',
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Wrong.args = {
   type: TrackCardVariant.Wrong,

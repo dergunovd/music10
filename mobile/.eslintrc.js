@@ -1,7 +1,11 @@
 module.exports = {
   root: true,
+  parserOptions: {
+    project: "tsconfig.json",
+    sourceType: "module",
+  },
   extends: [
-    "@react-native-community",
+    // "@react-native-community",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",

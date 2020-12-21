@@ -1,3 +1,3 @@
-export * from './Game';
-export * from './Playlists';
-export * from './Result';
+export * from "./Game";
+export * from "./Playlists";
+export * from "./Result";

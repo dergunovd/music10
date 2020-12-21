@@ -16,20 +16,20 @@ export interface ProgressBarItemProps extends ViewProps {
 }
 
 export const StyledProgressBarItem = styled.View<ProgressBarItemProps>`
-  margin: 0;
   padding: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
   border: 4px solid ${main};
+  margin: 0 0 0 6px;
   ${({ variant }) =>
     variant === ProgressBarItemVariant.Success
       ? css`
-          border-color: ${accent};
+          border: 4px solid ${accent};
         `
       : variant === ProgressBarItemVariant.Wrong
       ? css`
-          border-color: ${danger};
+          border: 4px solid ${danger};
         `
       : variant === ProgressBarItemVariant.Default
       ? css`

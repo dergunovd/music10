@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Track, TrackCardVariant, TrackProps } from "./Track";
+import { Track } from "./Track";
+import { TrackCardVariant, TrackProps } from "./Track.types";
 
 export default {
   title: "Components/Track",
@@ -14,7 +15,7 @@ export const Default = Template.bind({
   author: "Centr",
   track: "Город Дорог",
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 Default.args = {
   type: TrackCardVariant.Default,
@@ -27,7 +28,7 @@ export const Success = Template.bind({
   author: "Centr",
   track: "Город Дорог",
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 Success.args = {
   type: TrackCardVariant.Success,
@@ -40,7 +41,7 @@ export const Wrong = Template.bind({
   author: "Centr",
   track: "Город Дорог",
 });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 Wrong.args = {
   type: TrackCardVariant.Wrong,

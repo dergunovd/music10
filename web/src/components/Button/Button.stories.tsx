@@ -12,7 +12,7 @@ const Template = (props: ButtonProps) => <Button {...props}>Button</Button>;
 export const Default = Template.bind({});
 
 export const Primary = Template.bind({});
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Primary.args = { primary: true };
 // Primary.props = { primary: true };

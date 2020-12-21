@@ -1,2 +1,2 @@
-export * from './ProgressBar';
-export * from './ProgressBarItem';
+export * from "./ProgressBar";
+export * from "./ProgressBarItem";

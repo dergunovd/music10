@@ -15,7 +15,7 @@ export const Result: React.FC = () => {
     setResult({ isEnd: false, progress: [] });
     setScreen(Screen.PLAYLIST);
     await ws.reconnect();
-  }, [setResult, setScreen]);
+  }, [setResult, setScreen, ws]);
 
   return (
     <>
@@ -31,7 +31,9 @@ export const Result: React.FC = () => {
         </Text>
         <Progress />
 
-        <Button onPress={replay} primary title="Играть снова" />
+        <Button onPress={replay} primary>
+          Играть снова
+        </Button>
       </ResultLayout>
     </>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, ViewProps } from "react-native";
+import { Text, View, ViewProps } from "react-native";
 import {
   HeaderLogo,
   HeaderNav,
@@ -16,21 +16,34 @@ export interface HeaderProps extends ViewProps {
 export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
   <StyledHeader {...props}>
     <HeaderLogo>
-      <Text>Music10 </Text>
-      <Text
-        style={css`
-          font-size: 12px;
-        `}
-      >
-        β
+      <Text>
+        <Text
+          style={css`
+            font-size: 24px;
+            font-weight: 500;
+          `}
+        >
+          Music10{" "}
+        </Text>
+        <Text
+          style={css`
+            font-size: 12px;
+            position: relative;
+            top: -12px;
+          `}
+        >
+          β
+        </Text>
       </Text>
-      <Text
-        style={css`
-          font-size: 12px;
-        `}
-      >
-        Design by Qurle
-      </Text>
+      <View>
+        <Text
+          style={css`
+            font-size: 12px;
+          `}
+        >
+          Design by Qurle
+        </Text>
+      </View>
     </HeaderLogo>
     <HeaderTitle>{text}</HeaderTitle>
     <HeaderNav>{nav}</HeaderNav>

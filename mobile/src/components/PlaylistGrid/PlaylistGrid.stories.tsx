@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import {PlaylistGrid} from './PlaylistGrid';
-import {Button} from '../Button';
+import { PlaylistGrid } from "./PlaylistGrid";
+import { Button } from "../Button";
 
 export default {
-  title: 'Components/PlaylistGrid',
+  title: "Components/PlaylistGrid",
   component: PlaylistGrid,
 };
 
