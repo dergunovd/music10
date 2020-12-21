@@ -1,4 +1,7 @@
 import React, { useMemo, useState } from "react";
+import { View } from "react-native";
+import { css } from "@emotion/native";
+
 import { Api, bg, Result, WS } from "./src/utils";
 import {
   ApiContext,
@@ -8,8 +11,6 @@ import {
   WsContext,
 } from "./src/contexts";
 import { Playlists, Game, Result as ResultScreen } from "./src/screens";
-import { View } from "react-native";
-import { css } from "@emotion/native";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);

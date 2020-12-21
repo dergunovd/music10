@@ -1,11 +1,12 @@
 import React, { useCallback, useContext } from "react";
-
-import { GameContext, Screen, WsContext } from "../../contexts";
-import { Button, Header } from "../../components";
-import { ResultLayout } from "./ResultLayout";
-import { Progress } from "../Game/Progress/Progress";
 import { Text } from "react-native";
 import { css } from "@emotion/native";
+
+import { GameContext, Screen, WsContext } from "../../contexts";
+import { Button, ButtonText, Header } from "../../components";
+import { main } from "../../utils";
+import { ResultLayout } from "./ResultLayout";
+import { Progress } from "../Game/Progress/Progress";
 
 export const Result: React.FC = () => {
   const { result, setScreen, setResult } = useContext(GameContext);
@@ -24,6 +25,7 @@ export const Result: React.FC = () => {
         <Text
           style={css`
             font-size: 48px;
+            color: ${main};
           `}
         >
           Вы угадали {result.progress.filter((r) => r).length} из{" "}
@@ -31,8 +33,8 @@ export const Result: React.FC = () => {
         </Text>
         <Progress />
 
-        <Button onPress={replay} primary>
-          Играть снова
+        <Button onPress={replay} primary accessibilityRole="button">
+          <ButtonText>Играть снова</ButtonText>
         </Button>
       </ResultLayout>
     </>

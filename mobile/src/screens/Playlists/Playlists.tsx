@@ -1,11 +1,9 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { css } from "@emotion/native";
+import { View } from "react-native";
 
 import { Playlist } from "../../interfaces";
 import { ApiContext, GameContext, Screen, WsContext } from "../../contexts";
-import { Button, Header, PlaylistGrid } from "../../components";
-import { main } from "../../utils";
+import { Button, ButtonText, Header, PlaylistGrid } from "../../components";
 
 export const Playlists: React.FC = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
@@ -31,13 +29,7 @@ export const Playlists: React.FC = () => {
       <PlaylistGrid>
         {playlists.map((p) => (
           <Button key={p.id} onPress={() => choosePlaylist(p.id)}>
-            <Text
-              style={css`
-                color: ${main};
-              `}
-            >
-              {p.name}
-            </Text>
+            <ButtonText>{p.name}</ButtonText>
           </Button>
         ))}
       </PlaylistGrid>

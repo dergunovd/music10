@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { GameContext, Screen } from "../../contexts";
 import { Result } from "./Result";
@@ -26,9 +26,7 @@ describe("Result", () => {
       </GameContext.Provider>
     );
 
-    await waitFor(() =>
-      expect(screen.getAllByText("Вы угадали 5 из 8 треков")).toBeDefined()
-    );
+    expect(screen.getAllByText("Вы угадали 5 из 8 треков")).toBeDefined();
   });
 
   it("Should game again", async () => {
@@ -46,10 +44,9 @@ describe("Result", () => {
         <Result />
       </GameContext.Provider>
     );
-    await waitFor(() => {
-      fireEvent.press(screen.getByRole("button"));
-      expect(setScreen).toHaveBeenCalledTimes(1);
-      expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
-    });
+    fireEvent.press(screen.getByRole("button"));
+
+    expect(setScreen).toHaveBeenCalledTimes(1);
+    expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
   });
 });

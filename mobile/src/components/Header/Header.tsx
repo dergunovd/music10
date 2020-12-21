@@ -16,7 +16,14 @@ export interface HeaderProps extends ViewProps {
 export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
   <StyledHeader {...props}>
     <HeaderLogo>
-      <Text>
+      <View
+        style={css`
+          align-items: flex-start;
+          flex-direction: row;
+          display: flex;
+          justify-content: flex-start;
+        `}
+      >
         <Text
           style={css`
             font-size: 24px;
@@ -34,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
         >
           β
         </Text>
-      </Text>
+      </View>
       <View>
         <Text
           style={css`

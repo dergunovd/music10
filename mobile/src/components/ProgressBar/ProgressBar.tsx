@@ -12,13 +12,10 @@ export interface ProgressBarProps {
 export const StyledProgressBar = styled.View<
   Omit<ProgressBarProps, "progress">
 >`
-  margin: 0;
+  margin: 24px 0;
   display: flex;
   flex-direction: row;
   padding: 0;
-  [data-variant="${ProgressBarItemVariant.Current}"] {
-    width: 36px;
-  }
 `;
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
