@@ -1,7 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from "axios";
 
-import { API_HOST } from './variables';
-import { IApi } from '../interfaces/api';
+import { API_HOST } from "./variables";
+import { IApi } from "../interfaces/api";
 
 export class Api implements IApi {
   private axiosInstance: AxiosInstance;
@@ -14,6 +14,6 @@ export class Api implements IApi {
 
   getPlaylists = (query?: string) =>
     this.axiosInstance
-      .get(`playlists${query ? `?query=${query}` : ''}`)
+      .get(`playlists${query ? `?query=${query}` : ""}`)
       .then(({ data }) => data);
 }

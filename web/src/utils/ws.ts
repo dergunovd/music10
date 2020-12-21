@@ -33,4 +33,9 @@ export class WS {
   next = async () => this.socket.emit('next');
 
   choose = async (trackId: number) => this.socket.emit('choose', trackId);
+
+  reconnect = async () => {
+    await this.socket.disconnect();
+    this.socket.connect();
+  };
 }

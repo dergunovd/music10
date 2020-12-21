@@ -1,57 +1,62 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { render, screen, waitFor } from '@testing-library/react';
+import React from "react";
+import { render } from "@testing-library/react-native";
 
-import { Progress } from './Progress';
-import { GameContext, Screen } from '../../../contexts/game.context';
-import { PROGRESS } from '../../../mocks/progress';
+import { Progress } from "./Progress";
+import { GameContext, Screen } from "../../../contexts";
+import { PROGRESS } from "../../../mocks";
+import { ProgressBarItem, ProgressBarItemVariant } from "../../../components";
 
-describe('Progress', () => {
+describe("Progress", () => {
   const setScreen = jest.fn();
   const setResult = jest.fn();
+  const setGameState = jest.fn();
 
-  it('Should render', async () => {
-    act(() => {
-      render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: false },
-            setResult,
-          }}
-        >
-          <Progress />
-        </GameContext.Provider>,
-      );
-    });
-    await waitFor(() =>
-      expect(screen.getAllByRole('progressbar')).toHaveLength(8),
+  it("Should render", async () => {
+    const screen = render(
+      <GameContext.Provider
+        value={{
+          screen: Screen.PLAYLIST,
+          setScreen,
+          result: { progress: PROGRESS, isEnd: false },
+          setResult,
+          gameState: { isSelectTrack: false, playlistName: "" },
+          setGameState,
+        }}
+      >
+        <Progress />
+      </GameContext.Provider>
     );
-    expect(screen.getAllByRole('progressbar')[0].classList).toContain(
-      'bg-success',
+    expect(screen.getAllByRole("progressbar")).toHaveLength(10);
+    expect(screen.getAllByRole("progressbar")[0].props.variant).toBe(
+      ProgressBarItemVariant.Success
     );
-    expect(screen.getAllByRole('progressbar')[1].classList).toContain(
-      'bg-danger',
+    expect(screen.getAllByRole("progressbar")[1].props.variant).toBe(
+      ProgressBarItemVariant.Wrong
+    );
+    expect(screen.getAllByRole("progressbar")[8].props.variant).toBe(
+      ProgressBarItemVariant.Current
+    );
+    expect(screen.getAllByRole("progressbar")[9].props.variant).toBe(
+      ProgressBarItemVariant.Default
     );
   });
 
-  it('Should go to result screen', async () => {
-    act(() => {
-      render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-          }}
-        >
-          <Progress />
-        </GameContext.Provider>,
-      );
-    });
-    await waitFor(() => expect(setScreen).toHaveBeenCalled());
+  it("Should go to result screen", async () => {
+    render(
+      <GameContext.Provider
+        value={{
+          screen: Screen.PLAYLIST,
+          setScreen,
+          result: { progress: PROGRESS, isEnd: true },
+          setResult,
+          gameState: { isSelectTrack: false, playlistName: "" },
+          setGameState,
+        }}
+      >
+        <Progress />
+      </GameContext.Provider>
+    );
+    expect(setScreen).toHaveBeenCalled();
     expect(setScreen).toHaveBeenCalledTimes(1);
     expect(setScreen).toHaveBeenCalledWith(Screen.RESULT);
   });

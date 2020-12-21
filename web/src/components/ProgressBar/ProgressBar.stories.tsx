@@ -12,11 +12,11 @@ export default {
 const Template = (props: ProgressBarProps) => <ProgressBar {...props} />;
 
 export const Default = Template.bind({ progress: PROGRESS });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Default.args = { progress: PROGRESS };
 
 export const Vertical = Template.bind({ vertical: true, progress: PROGRESS });
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
 Vertical.args = { progress: PROGRESS, vertical: true };

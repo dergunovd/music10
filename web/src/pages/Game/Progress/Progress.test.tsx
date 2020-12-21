@@ -10,6 +10,7 @@ import { ProgressBarItemVariant } from '../../../components';
 describe('Progress', () => {
   const setScreen = jest.fn();
   const setResult = jest.fn();
+  const setGameState = jest.fn();
 
   it('Should render', async () => {
     act(() => {
@@ -20,6 +21,8 @@ describe('Progress', () => {
             setScreen,
             result: { progress: PROGRESS, isEnd: false },
             setResult,
+            gameState: { isSelectTrack: false, playlistName: '' },
+            setGameState,
           }}
         >
           <Progress />
@@ -52,6 +55,8 @@ describe('Progress', () => {
             setScreen,
             result: { progress: PROGRESS, isEnd: true },
             setResult,
+            gameState: { isSelectTrack: false, playlistName: '' },
+            setGameState,
           }}
         >
           <Progress />

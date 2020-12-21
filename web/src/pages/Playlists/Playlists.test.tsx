@@ -8,8 +8,8 @@ import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
 import { PLAYLISTS } from '../../mocks';
 
 describe('Playlists', () => {
-  let api = new Api();
-  let ws = new WS();
+  const api = new Api();
+  const ws = new WS();
 
   beforeEach(async () => {
     jest.spyOn(api, 'getPlaylists').mockImplementation(async () => PLAYLISTS);
@@ -32,6 +32,7 @@ describe('Playlists', () => {
   it('Should select playlist', async () => {
     const setScreen = jest.fn();
     const setResult = jest.fn();
+    const setGameState = jest.fn();
     act(() => {
       render(
         <ApiContext.Provider value={api}>
@@ -42,6 +43,8 @@ describe('Playlists', () => {
                 setScreen,
                 result: { progress: [], isEnd: false },
                 setResult,
+                gameState: { isSelectTrack: false, playlistName: '' },
+                setGameState,
               }}
             >
               <Playlists />

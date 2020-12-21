@@ -6,6 +6,9 @@
 html
   margin: 0
   padding: 0
+  font-size: 8px
+  @media (min-width: 1000px)
+    font-size: 12px
 
 body
   margin: 0
@@ -25,22 +28,21 @@ h3
 
 h1
   font-weight: bold
-  font-size: 72px
+  font-size: 6rem
 
 
 h2
-  font-size: 48px
+  font-size: 4rem
 
 
 h3
-  font-size: 24px
+  font-size: 2rem
 
 
 a
   text-decoration: none
   color: $main
-
-a:hover
-  transition: color 0.3s ease-in-out
-  color: $accent
+  &:hover
+    transition: color 0.3s ease-in-out
+    color: $accent
 

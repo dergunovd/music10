@@ -1,42 +1,40 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import React from "react";
+import { act, fireEvent, render } from "@testing-library/react-native";
 
-import { Playlists } from './Playlists';
-import { Api } from '../../utils/api';
-import { ApiContext } from '../../contexts/api.context';
-import { PLAYLISTS } from '../../mocks/playlists';
-import { GameContext, Screen } from '../../contexts/game.context';
-import { WS } from '../../utils/ws';
-import { WsContext } from '../../contexts/ws.context';
+import { Playlists } from "./Playlists";
+import { Api, WS } from "../../utils";
+import { ApiContext, GameContext, Screen, WsContext } from "../../contexts";
+import { PLAYLISTS } from "../../mocks";
 
-describe('Playlists', () => {
-  let api = new Api();
-  let ws = new WS();
+describe("Playlists", () => {
+  const api = new Api();
+  const ws = new WS();
 
   beforeEach(async () => {
-    jest.spyOn(api, 'getPlaylists').mockImplementation(async () => PLAYLISTS);
-    jest.spyOn(ws, 'setPlaylist');
+    jest.spyOn(api, "getPlaylists").mockImplementation(async () => PLAYLISTS);
+    jest.spyOn(ws, "setPlaylist");
   });
 
-  it('Should render', async () => {
-    act(() => {
-      render(
+  it("Should render", async () => {
+    act(async () => {
+      const screen = render(
         <ApiContext.Provider value={api}>
           <Playlists />
-        </ApiContext.Provider>,
+        </ApiContext.Provider>
       );
+
+      expect(api.getPlaylists).toHaveBeenCalled();
+      expect(screen.getAllByRole("button")).toHaveLength(17);
+      expect(screen.getAllByRole("button")[0]).toContain("Русский рэп");
     });
-    await waitFor(() => expect(api.getPlaylists).toHaveBeenCalled());
-    expect(screen.getAllByRole('button')).toHaveLength(17);
-    expect(screen.getAllByRole('button')[0]).toHaveTextContent('Русский рэп');
   });
 
-  it('Should select playlist', async () => {
+  it("Should select playlist", async () => {
     const setScreen = jest.fn();
     const setResult = jest.fn();
-    act(() => {
-      render(
+    const setGameState = jest.fn();
+    act(async () => {
+      const screen = render(
         <ApiContext.Provider value={api}>
           <WsContext.Provider value={ws}>
             <GameContext.Provider
@@ -45,20 +43,22 @@ describe('Playlists', () => {
                 setScreen,
                 result: { progress: [], isEnd: false },
                 setResult,
+                gameState: { isSelectTrack: false, playlistName: "" },
+                setGameState,
               }}
             >
               <Playlists />
             </GameContext.Provider>
           </WsContext.Provider>
-        </ApiContext.Provider>,
+        </ApiContext.Provider>
       );
+
+      await fireEvent.press(screen.getAllByRole("button")[0]);
+      expect(setScreen).toHaveBeenCalled();
+      expect(setScreen).toBeCalledTimes(1);
+      expect(setScreen).toBeCalledWith(Screen.GAME);
+      expect(ws.setPlaylist).toBeCalledTimes(1);
+      expect(ws.setPlaylist).toBeCalledWith(PLAYLISTS[0].id);
     });
-    await waitFor(() => expect(api.getPlaylists).toHaveBeenCalled());
-    screen.getAllByRole('button')[0].click();
-    await waitFor(() => expect(setScreen).toHaveBeenCalled());
-    expect(setScreen).toBeCalledTimes(1);
-    expect(setScreen).toBeCalledWith(Screen.GAME);
-    expect(ws.setPlaylist).toBeCalledTimes(1);
-    expect(ws.setPlaylist).toBeCalledWith(PLAYLISTS[0].id);
   });
 });

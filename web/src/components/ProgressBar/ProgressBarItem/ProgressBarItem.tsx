@@ -18,10 +18,10 @@ export interface ProgressBarItemProps {
 export const StyledProgressBarItem = styled.li<ProgressBarItemProps>`
   margin: 0;
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 2rem;
+  height: 2rem;
   display: block;
-  border-radius: 12px;
+  border-radius: 1rem;
   border: 4px solid ${main};
   transition: all 0.3s ease-in-out;
   ${({ variant }) =>

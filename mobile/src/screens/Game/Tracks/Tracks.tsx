@@ -1,60 +1,62 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
-import {Track} from '../../../interfaces';
-import {WsContext} from '../../../contexts/ws.context';
-import {WsAnswerChoose} from '../../../utils/ws';
-import {GameContext} from '../../../contexts/game.context';
-import {Caption, Card, Paragraph} from 'react-native-paper';
+import { Track as TrackInterface } from "../../../interfaces";
+import { WsContext, GameContext } from "../../../contexts";
+import { WsAnswerChoose } from "../../../utils";
+import { Track, TrackCardVariant, TracksGrid } from "../../../components";
 
 interface Props {
-  tracks: Track[];
+  tracks: TrackInterface[];
 }
 
-export const Tracks: React.FC<Props> = ({tracks}) => {
+export const Tracks: React.FC<Props> = ({ tracks }) => {
   const [selected, setSelected] = useState(0);
   const [correct, setCorrect] = useState(0);
-  const {setResult} = useContext(GameContext);
+  const { setResult, gameState, setGameState } = useContext(GameContext);
   const ws = useContext(WsContext);
 
   useEffect(() => {
     setSelected(0);
+    setGameState({ ...gameState, isSelectTrack: false });
     setCorrect(0);
   }, [tracks]);
 
   const select = useCallback(
     (trackId) => {
       setSelected(trackId);
+      setGameState({ ...gameState, isSelectTrack: true });
       ws.choose(trackId).then((socket) =>
-        socket.once('chooseResult', ({correct, result}: WsAnswerChoose) => {
+        socket.once("chooseResult", ({ correct, result }: WsAnswerChoose) => {
           setCorrect(correct);
           setResult(result);
-        }),
+        })
       );
     },
-    [tracks, ws],
+    [tracks, ws]
   );
 
   const cardVariant = useCallback(
-    (trackId: number): string => {
+    (trackId: number): TrackCardVariant => {
       if (correct) {
-        if (correct === trackId) return 'success';
-        if (selected === trackId) return 'danger';
+        if (correct === trackId) return TrackCardVariant.Success;
+        if (selected === trackId) return TrackCardVariant.Wrong;
       }
-      if (selected === trackId) return 'info';
-      return 'light';
+      return TrackCardVariant.Default;
     },
-    [selected, correct],
+    [selected, correct]
   );
 
   return (
-    <View>
-      {tracks.map((track) => (
-        <Card key={track.id} onPress={() => !correct && select(track.id)}>
-          <Paragraph>{track.name}</Paragraph>
-          <Caption>{track.author}</Caption>
-        </Card>
+    <TracksGrid>
+      {tracks.map(({ name, id, author }) => (
+        <Track
+          key={id}
+          onPress={() => !correct && select(id)}
+          track={name}
+          author={author}
+          type={cardVariant(id)}
+        />
       ))}
-    </View>
+    </TracksGrid>
   );
 };

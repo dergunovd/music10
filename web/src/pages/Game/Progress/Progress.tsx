@@ -4,10 +4,10 @@ import { GameContext, Screen } from '../../../contexts';
 import { ProgressBar } from '../../../components';
 
 export const Progress: React.FC = () => {
-  const { result, setScreen } = useContext(GameContext);
+  const { result, screen, setScreen } = useContext(GameContext);
 
   useEffect(() => {
-    if (result.isEnd) setScreen(Screen.RESULT);
+    if (result.isEnd && screen !== Screen.RESULT) setScreen(Screen.RESULT);
   });
 
   return <ProgressBar progress={result.progress} />;

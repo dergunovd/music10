@@ -3,19 +3,33 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import { WS, WS_HOST } from '../../../utils';
-import { WS_ANSWER_NEXT } from '../../../mocks';
-import { WsContext } from '../../../contexts';
+import { PROGRESS, WS_ANSWER_NEXT } from '../../../mocks';
+import { GameContext, Screen, WsContext } from '../../../contexts';
 import { Tracks } from './Tracks';
 
 describe('Tracks', () => {
   const ws = new WS();
   const socket = new WebSocket(`${WS_HOST}/game`);
+  const setScreen = jest.fn();
+  const setResult = jest.fn();
+  const setGameState = jest.fn();
 
   it('Should render', async () => {
     act(() => {
       render(
         <WsContext.Provider value={ws}>
-          <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+          <GameContext.Provider
+            value={{
+              screen: Screen.PLAYLIST,
+              setScreen,
+              result: { progress: PROGRESS, isEnd: true },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: '' },
+              setGameState,
+            }}
+          >
+            <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+          </GameContext.Provider>
         </WsContext.Provider>,
       );
     });
@@ -29,7 +43,19 @@ describe('Tracks', () => {
     act(() => {
       render(
         <WsContext.Provider value={ws}>
-          <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+          {' '}
+          <GameContext.Provider
+            value={{
+              screen: Screen.PLAYLIST,
+              setScreen,
+              result: { progress: PROGRESS, isEnd: true },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: '' },
+              setGameState,
+            }}
+          >
+            <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+          </GameContext.Provider>
         </WsContext.Provider>,
       );
     });

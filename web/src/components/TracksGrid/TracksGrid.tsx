@@ -3,8 +3,12 @@ import styled from '@emotion/styled';
 export const TracksGrid = styled.div`
   display: grid;
   margin: auto;
-  grid-gap: 10px 15px;
+  width: 100%;
+  grid-gap: 1rem 1.5rem;
   align-content: stretch;
   justify-content: center;
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  grid-template: repeat(4, 1fr) / 1fr;
+  @media (min-width: 1000px) {
+    max-width: 560px;
+  }
 `;

@@ -1,7 +1,7 @@
-import io from 'socket.io-client';
-import { Track } from '../interfaces';
+import io from "socket.io-client";
+import { Track } from "../interfaces";
 
-import { WS_HOST } from './variables';
+import { WS_HOST } from "./variables";
 
 export interface Result {
   progress: boolean[];
@@ -19,18 +19,23 @@ export interface WsAnswerChoose {
 }
 
 export class WS {
-  private socket;
+  private socket: SocketIOClient.Socket;
 
   constructor() {
     this.socket = io(`${WS_HOST}/game`, {
-      transports: ['websocket'],
+      transports: ["websocket"],
     });
   }
 
   setPlaylist = (playlistId: number) =>
-    this.socket.emit('setPlaylist', playlistId);
+    this.socket.emit("setPlaylist", playlistId);
 
-  next = async () => this.socket.emit('next');
+  next = async () => this.socket.emit("next");
 
-  choose = async (trackId: number) => this.socket.emit('choose', trackId);
+  choose = async (trackId: number) => this.socket.emit("choose", trackId);
+
+  reconnect = async () => {
+    await this.socket.disconnect();
+    this.socket.connect();
+  };
 }
