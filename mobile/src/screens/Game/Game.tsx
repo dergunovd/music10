@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { GameContext, WsContext } from "../../contexts";
 import { WsAnswerNext } from "../../utils";
 import { Track } from "../../interfaces";
-import { Button, Header } from "../../components";
+import { Button, ButtonText, Header } from "../../components";
 import { Music } from "./Music/Music";
 import { Tracks } from "./Tracks/Tracks";
 import { Progress } from "./Progress/Progress";
@@ -29,20 +29,23 @@ export const Game: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <>
       <Header text="GAME" />
-      <GameLayout>
-        <Music mp3={mp3} />
-        <Tracks tracks={tracks} />
-        <Progress />
+      <ScrollView>
+        <GameLayout>
+          <Music mp3={mp3} />
+          <Tracks tracks={tracks} />
+          <Progress />
 
-        <Button
-          onPress={play}
-          disabled={!isSelectTrack && !!tracks.length}
-          primary
-          title={tracks.length ? "Дальше" : "Поехали"}
-        />
-      </GameLayout>
-    </ScrollView>
+          <Button
+            onPress={play}
+            disabled={!isSelectTrack && !!tracks.length}
+            primary
+          >
+            <ButtonText>{tracks.length ? "Дальше" : "Поехали"}</ButtonText>
+          </Button>
+        </GameLayout>
+      </ScrollView>
+    </>
   );
 };

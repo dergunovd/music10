@@ -3,19 +3,19 @@ import styled from "@emotion/native";
 import { accent, bg, main } from "../../utils";
 
 export const StyledHeader = styled.View`
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-top: 42px;
-  margin-bottom: 42px;
+  align-items: flex-start;
+  padding-top: 24px;
+  margin-bottom: 24px;
 `;
 
 export const HeaderLogo = styled.View`
-  padding: 24px 80px;
+  padding: 12px 36px;
   font-size: 24px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   background: ${accent};
   color: ${bg};
   font-weight: 700;

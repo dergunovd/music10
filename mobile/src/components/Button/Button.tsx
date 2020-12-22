@@ -14,8 +14,13 @@ export const Button = styled.Pressable<ButtonProps>`
   font-weight: 700;
   position: relative;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: ${main};
-
+  & + & {
+    margin-top: 12px;
+  }
   ${({ primary }) =>
     primary
       ? css`
@@ -35,4 +40,9 @@ export const Button = styled.Pressable<ButtonProps>`
     color: ${main};
     background: transparent;
   }
+`;
+
+export const ButtonText = styled.Text`
+  color: ${main};
+  text-align: center;
 `;

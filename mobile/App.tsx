@@ -1,23 +1,16 @@
-import React, { useMemo, useState } from "react";
-import { Api, bg, Result, WS } from "./src/utils";
-import {
-  ApiContext,
-  GameContext,
-  GameState,
-  Screen,
-  WsContext,
-} from "./src/contexts";
-import { Playlists, Game, Result as ResultScreen } from "./src/screens";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { css } from "@emotion/native";
+
+import { bg, Result } from "./src/utils";
+import { GameContext, GameState, Screen } from "./src/contexts";
+import { Game, Playlists, Result as ResultScreen } from "./src/screens";
+import { NetworkContextProvider } from "../web/src/components";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);
   const [result, setResult] = useState<Result>({} as Result);
   const [gameState, setGameState] = useState<GameState>({} as GameState);
-
-  const api = useMemo(() => new Api(), []);
-  const ws = useMemo(() => new WS(), []);
 
   return (
     <View
@@ -26,24 +19,22 @@ export default function App() {
         height: 100%;
       `}
     >
-      <ApiContext.Provider value={api}>
-        <WsContext.Provider value={ws}>
-          <GameContext.Provider
-            value={{
-              screen,
-              setScreen,
-              result,
-              setResult,
-              gameState,
-              setGameState,
-            }}
-          >
-            {screen === Screen.PLAYLIST && <Playlists />}
-            {screen === Screen.GAME && <Game />}
-            {screen === Screen.RESULT && <ResultScreen />}
-          </GameContext.Provider>
-        </WsContext.Provider>
-      </ApiContext.Provider>
+      <NetworkContextProvider>
+        <GameContext.Provider
+          value={{
+            screen,
+            setScreen,
+            result,
+            setResult,
+            gameState,
+            setGameState,
+          }}
+        >
+          {screen === Screen.PLAYLIST && <Playlists />}
+          {screen === Screen.GAME && <Game />}
+          {screen === Screen.RESULT && <ResultScreen />}
+        </GameContext.Provider>
+      </NetworkContextProvider>
     </View>
   );
 }

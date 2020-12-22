@@ -1,14 +1,17 @@
 import React from "react";
 import { act, fireEvent, render } from "@testing-library/react-native";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-import { Playlists } from "./Playlists";
 import { Api, WS } from "../../utils";
 import { ApiContext, GameContext, Screen, WsContext } from "../../contexts";
 import { PLAYLISTS } from "../../mocks";
+import { Playlists } from "./Playlists";
+import { NetworkContextProvider } from "../../components";
 
 describe("Playlists", () => {
   const api = new Api();
   const ws = new WS();
+  const queryClient = new QueryClient();
 
   beforeEach(async () => {
     jest.spyOn(api, "getPlaylists").mockImplementation(async () => PLAYLISTS);
@@ -18,9 +21,9 @@ describe("Playlists", () => {
   it("Should render", async () => {
     act(async () => {
       const screen = render(
-        <ApiContext.Provider value={api}>
+        <NetworkContextProvider api={api} ws={ws}>
           <Playlists />
-        </ApiContext.Provider>
+        </NetworkContextProvider>
       );
 
       expect(api.getPlaylists).toHaveBeenCalled();
@@ -35,22 +38,20 @@ describe("Playlists", () => {
     const setGameState = jest.fn();
     act(async () => {
       const screen = render(
-        <ApiContext.Provider value={api}>
-          <WsContext.Provider value={ws}>
-            <GameContext.Provider
-              value={{
-                screen: Screen.PLAYLIST,
-                setScreen,
-                result: { progress: [], isEnd: false },
-                setResult,
-                gameState: { isSelectTrack: false, playlistName: "" },
-                setGameState,
-              }}
-            >
-              <Playlists />
-            </GameContext.Provider>
-          </WsContext.Provider>
-        </ApiContext.Provider>
+        <NetworkContextProvider api={api} ws={ws}>
+          <GameContext.Provider
+            value={{
+              screen: Screen.PLAYLIST,
+              setScreen,
+              result: { progress: [], isEnd: false },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: "" },
+              setGameState,
+            }}
+          >
+            <Playlists />
+          </GameContext.Provider>
+        </NetworkContextProvider>
       );
 
       await fireEvent.press(screen.getAllByRole("button")[0]);
