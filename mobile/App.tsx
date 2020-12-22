@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { View } from "react-native";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { css } from "@emotion/native";
 
 import { Api, bg, Result, WS } from "./src/utils";
@@ -19,6 +20,7 @@ export default function App() {
 
   const api = useMemo(() => new Api(), []);
   const ws = useMemo(() => new WS(), []);
+  const queryClient = useMemo(() => new QueryClient(), []);
 
   return (
     <View
@@ -27,24 +29,26 @@ export default function App() {
         height: 100%;
       `}
     >
-      <ApiContext.Provider value={api}>
-        <WsContext.Provider value={ws}>
-          <GameContext.Provider
-            value={{
-              screen,
-              setScreen,
-              result,
-              setResult,
-              gameState,
-              setGameState,
-            }}
-          >
-            {screen === Screen.PLAYLIST && <Playlists />}
-            {screen === Screen.GAME && <Game />}
-            {screen === Screen.RESULT && <ResultScreen />}
-          </GameContext.Provider>
-        </WsContext.Provider>
-      </ApiContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <ApiContext.Provider value={api}>
+          <WsContext.Provider value={ws}>
+            <GameContext.Provider
+              value={{
+                screen,
+                setScreen,
+                result,
+                setResult,
+                gameState,
+                setGameState,
+              }}
+            >
+              {screen === Screen.PLAYLIST && <Playlists />}
+              {screen === Screen.GAME && <Game />}
+              {screen === Screen.RESULT && <ResultScreen />}
+            </GameContext.Provider>
+          </WsContext.Provider>
+        </ApiContext.Provider>
+      </QueryClientProvider>
     </View>
   );
 }

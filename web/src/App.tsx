@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import {
   ApiContext,
@@ -17,26 +18,29 @@ const App = () => {
 
   const api = useMemo(() => new Api(), []);
   const ws = useMemo(() => new WS(), []);
+  const queryClient = useMemo(() => new QueryClient(), []);
 
   return (
-    <ApiContext.Provider value={api}>
-      <WsContext.Provider value={ws}>
-        <GameContext.Provider
-          value={{
-            screen,
-            setScreen,
-            result,
-            setResult,
-            gameState,
-            setGameState,
-          }}
-        >
-          {screen === Screen.PLAYLIST && <Playlists />}
-          {screen === Screen.GAME && <Game />}
-          {screen === Screen.RESULT && <ResultScreen />}
-        </GameContext.Provider>
-      </WsContext.Provider>
-    </ApiContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <ApiContext.Provider value={api}>
+        <WsContext.Provider value={ws}>
+          <GameContext.Provider
+            value={{
+              screen,
+              setScreen,
+              result,
+              setResult,
+              gameState,
+              setGameState,
+            }}
+          >
+            {screen === Screen.PLAYLIST && <Playlists />}
+            {screen === Screen.GAME && <Game />}
+            {screen === Screen.RESULT && <ResultScreen />}
+          </GameContext.Provider>
+        </WsContext.Provider>
+      </ApiContext.Provider>
+    </QueryClientProvider>
   );
 };
 

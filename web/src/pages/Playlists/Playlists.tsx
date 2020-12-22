@@ -1,18 +1,24 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
+import { useQuery } from 'react-query';
 
 import { Playlist } from '../../interfaces';
 import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
-import { Button, Header, PlaylistGrid } from '../../components';
+import {
+  Button,
+  Header,
+  Loader,
+  PlaylistGrid,
+  ErrorMessage,
+} from '../../components';
 
 export const Playlists: React.FC = () => {
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const api = useContext(ApiContext);
   const ws = useContext(WsContext);
   const { setScreen } = useContext(GameContext);
-
-  useEffect(() => {
-    api?.getPlaylists().then((playlists) => setPlaylists(playlists));
-  }, []);
+  const { isLoading, isError, isSuccess, error, data } = useQuery<
+    Playlist[],
+    Error
+  >('loadPlaylists', () => api?.getPlaylists());
 
   const choosePlaylist = useCallback(async (playlistId) => {
     await ws?.setPlaylist(playlistId);
@@ -22,13 +28,17 @@ export const Playlists: React.FC = () => {
   return (
     <>
       <Header text="Выберите плейлист" />
-      <PlaylistGrid>
-        {playlists.map((p) => (
-          <Button key={p.id} onClick={() => choosePlaylist(p.id)}>
-            {p.name}
-          </Button>
-        ))}
-      </PlaylistGrid>
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage>Ошибка: ${error?.message}</ErrorMessage>}
+      {isSuccess && (
+        <PlaylistGrid>
+          {data?.map((p) => (
+            <Button key={p.id} onClick={() => choosePlaylist(p.id)}>
+              {p.name}
+            </Button>
+          ))}
+        </PlaylistGrid>
+      )}
     </>
   );
 };

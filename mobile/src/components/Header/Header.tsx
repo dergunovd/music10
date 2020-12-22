@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
             font-size: 12px;
           `}
         >
-          Design by Qurle
+          Designed by Qurle
         </Text>
       </View>
     </HeaderLogo>
