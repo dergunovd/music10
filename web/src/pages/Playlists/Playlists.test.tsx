@@ -4,8 +4,9 @@ import { act } from 'react-dom/test-utils';
 
 import { Playlists } from './Playlists';
 import { Api, WS } from '../../utils';
-import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
+import { GameContext, Screen } from '../../contexts';
 import { PLAYLISTS } from '../../mocks';
+import { NetworkContextProvider } from '../../components';
 
 describe('Playlists', () => {
   const api = new Api();
@@ -19,9 +20,9 @@ describe('Playlists', () => {
   it('Should render', async () => {
     act(() => {
       render(
-        <ApiContext.Provider value={api}>
+        <NetworkContextProvider api={api} ws={ws}>
           <Playlists />
-        </ApiContext.Provider>,
+        </NetworkContextProvider>,
       );
     });
     await waitFor(() => expect(api.getPlaylists).toHaveBeenCalled());
@@ -35,22 +36,20 @@ describe('Playlists', () => {
     const setGameState = jest.fn();
     act(() => {
       render(
-        <ApiContext.Provider value={api}>
-          <WsContext.Provider value={ws}>
-            <GameContext.Provider
-              value={{
-                screen: Screen.PLAYLIST,
-                setScreen,
-                result: { progress: [], isEnd: false },
-                setResult,
-                gameState: { isSelectTrack: false, playlistName: '' },
-                setGameState,
-              }}
-            >
-              <Playlists />
-            </GameContext.Provider>
-          </WsContext.Provider>
-        </ApiContext.Provider>,
+        <NetworkContextProvider api={api} ws={ws}>
+          <GameContext.Provider
+            value={{
+              screen: Screen.PLAYLIST,
+              setScreen,
+              result: { progress: [], isEnd: false },
+              setResult,
+              gameState: { isSelectTrack: false, playlistName: '' },
+              setGameState,
+            }}
+          >
+            <Playlists />
+          </GameContext.Provider>
+        </NetworkContextProvider>,
       );
     });
     await waitFor(() => expect(api.getPlaylists).toHaveBeenCalled());
