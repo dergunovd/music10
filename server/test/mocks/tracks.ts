@@ -1,5 +1,8 @@
 import { Track } from '../../src/interfaces';
 
+/**
+ * Example of tracks array
+ */
 export const TRACKS: Track[] = [
   {
     id: 92007768,

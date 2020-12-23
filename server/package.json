@@ -19,7 +19,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "doc": "compodoc -p tsconfig.json -s",
+    "deploy:doc": "scp -r documentation/* dergunov@dplnk.ru:~/music/web/build/dev/doc/server",
+    "deploy:coverage": "scp -r coverage/lcov-report/* dergunov@dplnk.ru:~/music/web/build/dev/coverage/server"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.1",
@@ -33,6 +36,7 @@
     "forever": "^3.0.4"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^7.5.1",
     "@nestjs/schematics": "^7.1.3",
     "@nestjs/testing": "^7.5.1",
@@ -53,7 +57,7 @@
     "ts-loader": "^8.0.8",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.3"
   },
   "jest": {
     "moduleFileExtensions": [
