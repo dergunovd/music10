@@ -1,3 +1,6 @@
+/**
+ * Example of playlists array
+ */
 export const PLAYLISTS = [
   { id: 6536346784, name: 'Русский рэп' },
   { id: 6536456504, name: 'Русское' },

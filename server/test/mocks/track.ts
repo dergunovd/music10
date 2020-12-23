@@ -1,3 +1,6 @@
+/**
+ * Example of track
+ */
 export const TRACK = {
   id: 92007768,
   name: 'Вокруг шум',

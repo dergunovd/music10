@@ -1,10 +1,22 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { MusicApi } from '../../interfaces';
+import { MusicApi, Playlist } from '../../interfaces';
 
+/**
+ * Service for Deezer
+ * @implements MusicApi
+ * @interface MusicApi
+ */
 @Injectable()
 export class DeezerApiService implements MusicApi {
+  /**
+   * DeezerApiService constructor
+   * @param httpService
+   */
   constructor(private httpService: HttpService) {}
 
+  /**
+   * Get playlists
+   */
   async getPlaylists() {
     return await this.httpService
       .get('/user/3098401824/playlists')
@@ -19,12 +31,22 @@ export class DeezerApiService implements MusicApi {
       );
   }
 
+  /**
+   * Search playlists by query-string
+   * @param query
+   * @return
+   */
   async searchPlaylists(query) {
     return (await this.getPlaylists()).filter((playlist) =>
       new RegExp(query, 'ig').test(playlist.name),
     );
   }
 
+  /**
+   * Get playlist by id
+   * @param playlistId - playlist id
+   * @return playlist
+   */
   async getPlaylistById(playlistId) {
     return await this.httpService
       .get(`/playlist/${playlistId}`)
@@ -36,7 +58,11 @@ export class DeezerApiService implements MusicApi {
       }));
   }
 
-  async getTracksByPlaylistId(playlistId) {
+  /**
+   * Get tracks by playlist id
+   * @param playlistId - playlist id
+   * @return tracks
+   */ async getTracksByPlaylistId(playlistId) {
     return await this.httpService
       .get(`/playlist/${playlistId}`)
       .toPromise()
@@ -52,6 +78,11 @@ export class DeezerApiService implements MusicApi {
       );
   }
 
+  /**
+   * Get track by id
+   * @param trackId
+   * @return track
+   */
   async getTrackById(trackId) {
     return await this.httpService
       .get(`/track/${trackId}`)
