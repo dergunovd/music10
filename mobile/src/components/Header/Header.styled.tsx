@@ -10,7 +10,7 @@ export const StyledHeader = styled.View`
   margin-bottom: 24px;
 `;
 
-export const HeaderLogo = styled.View`
+export const HeaderLogo = styled.Pressable`
   padding: 12px 36px;
   font-size: 24px;
   display: flex;

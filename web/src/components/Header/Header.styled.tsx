@@ -16,6 +16,7 @@ export const HeaderLogo = styled.div`
   background: ${accent};
   color: ${bg};
   font-weight: 700;
+  cursor: pointer;
 `;
 export const HeaderTitle = styled.h2`
   display: none;

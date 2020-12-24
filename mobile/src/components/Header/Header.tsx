@@ -1,46 +1,58 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { Text, View } from "react-native";
 import { HeaderLogo, StyledHeader } from "./Header.styled";
 import { css } from "@emotion/native";
+import { GameContext, Screen, WsContext } from "../../contexts";
 
-export const Header: React.FC = (props) => (
-  <StyledHeader {...props}>
-    <HeaderLogo>
-      <View
-        style={css`
-          align-items: flex-start;
-          flex-direction: row;
-          display: flex;
-          justify-content: flex-start;
-        `}
-      >
-        <Text
+export const Header: React.FC = (props) => {
+  const { setScreen, setResult } = useContext(GameContext);
+  const ws = useContext(WsContext);
+
+  const goToStart = useCallback(async () => {
+    setResult({ isEnd: false, progress: [] });
+    setScreen(Screen.PLAYLIST);
+    await ws.reconnect();
+  }, []);
+
+  return (
+    <StyledHeader {...props}>
+      <HeaderLogo onPress={goToStart}>
+        <View
           style={css`
-            font-size: 24px;
-            font-weight: 500;
+            align-items: flex-start;
+            flex-direction: row;
+            display: flex;
+            justify-content: flex-start;
           `}
         >
-          Music10{" "}
-        </Text>
-        <Text
-          style={css`
-            font-size: 12px;
-            position: relative;
-            top: -12px;
-          `}
-        >
-          β
-        </Text>
-      </View>
-      <View>
-        <Text
-          style={css`
-            font-size: 12px;
-          `}
-        >
-          Designed by Qurle
-        </Text>
-      </View>
-    </HeaderLogo>
-  </StyledHeader>
-);
+          <Text
+            style={css`
+              font-size: 24px;
+              font-weight: 500;
+            `}
+          >
+            Music10{" "}
+          </Text>
+          <Text
+            style={css`
+              font-size: 12px;
+              position: relative;
+              top: -12px;
+            `}
+          >
+            β
+          </Text>
+        </View>
+        <View>
+          <Text
+            style={css`
+              font-size: 12px;
+            `}
+          >
+            Designed by Qurle
+          </Text>
+        </View>
+      </HeaderLogo>
+    </StyledHeader>
+  );
+};
