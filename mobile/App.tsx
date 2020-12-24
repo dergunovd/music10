@@ -3,16 +3,22 @@ import { View } from "react-native";
 import { css } from "@emotion/native";
 // @ts-ignore
 import AppMetrica from "react-native-appmetrica";
+import {
+  Colors,
+  IResult,
+  NetworkContextProvider,
+  GameContext,
+  IGameState,
+  GameScreen,
+} from "@dergunovd/music10";
 
-import { bg, Result } from "./src/utils";
-import { GameContext, GameState, Screen } from "./src/contexts";
-import { Game, Playlists, Result as ResultScreen } from "./src/screens";
-import { Header, NetworkContextProvider } from "./src/components";
+import { Game, Playlists, Result } from "./src/screens";
+import { Header } from "./src/components";
 
 export default function App() {
-  const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);
-  const [result, setResult] = useState<Result>({} as Result);
-  const [gameState, setGameState] = useState<GameState>({} as GameState);
+  const [screen, setScreen] = useState<GameScreen>(GameScreen.PLAYLIST);
+  const [result, setResult] = useState<IResult>({} as IResult);
+  const [gameState, setGameState] = useState<IGameState>({} as IGameState);
 
   useEffect(() => {
     AppMetrica.activate({
@@ -24,7 +30,7 @@ export default function App() {
   return (
     <View
       style={css`
-        background: ${bg};
+        background: ${Colors.bg};
         height: 100%;
       `}
     >
@@ -40,9 +46,9 @@ export default function App() {
           }}
         >
           <Header />
-          {screen === Screen.PLAYLIST && <Playlists />}
-          {screen === Screen.GAME && <Game />}
-          {screen === Screen.RESULT && <ResultScreen />}
+          {screen === GameScreen.PLAYLIST && <Playlists />}
+          {screen === GameScreen.GAME && <Game />}
+          {screen === GameScreen.RESULT && <Result />}
         </GameContext.Provider>
       </NetworkContextProvider>
     </View>

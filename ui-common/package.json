@@ -1,0 +1,68 @@
+{
+  "name": "@dergunovd/music10",
+  "author": "Dmitry Dergunov <dmitry@dergunov.net>",
+  "module": "dist/ui-common.esm.js",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build && cpx src/package.json dist/",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "publishPackage": "cd dist && npm publish",
+    "packPackage": "cd dist && npm pack",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "socket.io-client": "^2.3.1",
+    "react-query": "^3.5.5"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-query": ">=3.5.5"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.9.1",
+    "@types/react": "^17.0.0",
+    "@types/socket.io-client": "^1.4.34",
+    "cpx": "^1.5.0",
+    "husky": "^4.3.6",
+    "react": "^17.0.1",
+    "size-limit": "^4.9.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/ui-common.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/ui-common.esm.js",
+      "limit": "10 KB"
+    }
+  ]
+}

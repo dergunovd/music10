@@ -1,10 +1,16 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import {
+  WS,
+  WS_HOST,
+  GameContext,
+  GameScreen,
+  WsContext,
+  PROGRESS_MOCK,
+  WS_ANSWER_NEXT_MOCK,
+} from '@dergunovd/music10';
 
-import { WS, WS_HOST } from '../../../utils';
-import { PROGRESS, WS_ANSWER_NEXT } from '../../../mocks';
-import { GameContext, Screen, WsContext } from '../../../contexts';
 import { Tracks } from './Tracks';
 
 describe('Tracks', () => {
@@ -20,15 +26,15 @@ describe('Tracks', () => {
         <WsContext.Provider value={ws}>
           <GameContext.Provider
             value={{
-              screen: Screen.PLAYLIST,
+              screen: GameScreen.PLAYLIST,
               setScreen,
-              result: { progress: PROGRESS, isEnd: true },
+              result: { progress: PROGRESS_MOCK, isEnd: true },
               setResult,
               gameState: { isSelectTrack: false, playlistName: '' },
               setGameState,
             }}
           >
-            <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+            <Tracks tracks={WS_ANSWER_NEXT_MOCK.tracks} />
           </GameContext.Provider>
         </WsContext.Provider>,
       );
@@ -43,18 +49,17 @@ describe('Tracks', () => {
     act(() => {
       render(
         <WsContext.Provider value={ws}>
-          {' '}
           <GameContext.Provider
             value={{
-              screen: Screen.PLAYLIST,
+              screen: GameScreen.PLAYLIST,
               setScreen,
-              result: { progress: PROGRESS, isEnd: true },
+              result: { progress: PROGRESS_MOCK, isEnd: true },
               setResult,
               gameState: { isSelectTrack: false, playlistName: '' },
               setGameState,
             }}
           >
-            <Tracks tracks={WS_ANSWER_NEXT.tracks} />
+            <Tracks tracks={WS_ANSWER_NEXT_MOCK.tracks} />
           </GameContext.Provider>
         </WsContext.Provider>,
       );
@@ -69,6 +74,6 @@ describe('Tracks', () => {
     await waitFor(() => expect(screen.getAllByRole('button')).toHaveLength(4));
     screen.getAllByRole('button')[0].click();
     expect(ws.choose).toHaveBeenCalledTimes(1);
-    expect(ws.choose).toHaveBeenCalledWith(WS_ANSWER_NEXT.tracks[0].id);
+    expect(ws.choose).toHaveBeenCalledWith(WS_ANSWER_NEXT_MOCK.tracks[0].id);
   });
 });

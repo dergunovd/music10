@@ -1,8 +1,13 @@
 import React, { useCallback, useContext } from 'react';
 import { useQuery } from 'react-query';
+import {
+  ApiContext,
+  GameContext,
+  GameScreen,
+  WsContext,
+  IPlaylist,
+} from '@dergunovd/music10';
 
-import { Playlist } from '../../interfaces';
-import { ApiContext, GameContext, Screen, WsContext } from '../../contexts';
 import {
   Button,
   Header,
@@ -16,13 +21,13 @@ export const Playlists: React.FC = () => {
   const ws = useContext(WsContext);
   const { setScreen } = useContext(GameContext);
   const { isLoading, isError, isSuccess, error, data } = useQuery<
-    Playlist[],
+    IPlaylist[],
     Error
   >('loadPlaylists', () => api?.getPlaylists());
 
   const choosePlaylist = useCallback(async (playlistId) => {
     await ws?.setPlaylist(playlistId);
-    setScreen?.(Screen.GAME);
+    setScreen?.(GameScreen.GAME);
   }, []);
 
   return (

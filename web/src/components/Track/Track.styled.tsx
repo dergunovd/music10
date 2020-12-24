@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { accent, danger, main } from '../../utils';
 import { css } from '@emotion/react';
+import { Colors } from '@dergunovd/music10';
+
 import { TrackCardProps, TrackCardVariant } from './Track';
 
 export const StyledTrack = styled.div<TrackCardProps>`
@@ -11,26 +12,26 @@ export const StyledTrack = styled.div<TrackCardProps>`
   position: relative;
   text-align: center;
   cursor: pointer;
-  border: 2px solid ${main};
+  border: 2px solid ${Colors.main};
   &:hover {
     transition: all 0.3s ease-in-out;
-    border-color: ${accent};
+    border-color: ${Colors.accent};
   }
   ${({ type }) =>
     type === TrackCardVariant.Success
       ? css`
-          border: 2px solid ${accent};
-          color: ${accent};
+          border: 2px solid ${Colors.accent};
+          color: ${Colors.accent};
           &:hover {
-            border-color: ${main};
+            border-color: ${Colors.main};
           }
         `
       : type === TrackCardVariant.Wrong
       ? css`
-          border: 2px solid ${danger};
-          color: ${danger};
+          border: 2px solid ${Colors.danger};
+          color: ${Colors.danger};
           &:hover {
-            border-color: ${main};
+            border-color: ${Colors.main};
           }
         `
       : css``}

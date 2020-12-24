@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { TRACKS_PER_ROUND } from '@dergunovd/music10';
 
-import { TRACKS_PER_ROUND } from '../../utils';
 import { ProgressBarItem, ProgressBarItemVariant } from './ProgressBarItem';
 
 export interface ProgressBarProps {

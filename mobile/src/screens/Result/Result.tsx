@@ -1,10 +1,9 @@
 import React, { useCallback, useContext } from "react";
 import { Text } from "react-native";
 import { css } from "@emotion/native";
+import { GameContext, GameScreen, WsContext, Colors } from "@dergunovd/music10";
 
-import { GameContext, Screen, WsContext } from "../../contexts";
 import { Button, ButtonText } from "../../components";
-import { main } from "../../utils";
 import { ResultLayout } from "./ResultLayout";
 import { Progress } from "../Game/Progress/Progress";
 
@@ -14,7 +13,7 @@ export const Result: React.FC = () => {
 
   const replay = useCallback(async () => {
     setResult({ isEnd: false, progress: [] });
-    setScreen(Screen.PLAYLIST);
+    setScreen(GameScreen.PLAYLIST);
     await ws.reconnect();
   }, [setResult, setScreen, ws]);
 
@@ -23,7 +22,7 @@ export const Result: React.FC = () => {
       <Text
         style={css`
           font-size: 48px;
-          color: ${main};
+          color: ${Colors.main};
         `}
       >
         Вы угадали {result.progress.filter((r) => r).length} из{" "}

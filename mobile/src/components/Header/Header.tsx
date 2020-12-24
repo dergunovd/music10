@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { Text, View } from "react-native";
 import { HeaderLogo, StyledHeader } from "./Header.styled";
 import { css } from "@emotion/native";
-import { GameContext, Screen, WsContext } from "../../contexts";
+import { GameContext, GameScreen, WsContext } from "@dergunovd/music10";
 
 export const Header: React.FC = (props) => {
   const { setScreen, setResult } = useContext(GameContext);
@@ -10,7 +10,7 @@ export const Header: React.FC = (props) => {
 
   const goToStart = useCallback(async () => {
     setResult({ isEnd: false, progress: [] });
-    setScreen(Screen.PLAYLIST);
+    setScreen(GameScreen.PLAYLIST);
     await ws.reconnect();
   }, []);
 

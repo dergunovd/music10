@@ -1,9 +1,13 @@
 import React, { useCallback, useContext, useState } from "react";
 import { ScrollView } from "react-native";
+import {
+  GameContext,
+  WsContext,
+  GameScreen,
+  IWsAnswerNext,
+  ITrack,
+} from "@dergunovd/music10";
 
-import { GameContext, WsContext, Screen } from "../../contexts";
-import { WsAnswerNext } from "../../utils";
-import { Track } from "../../interfaces";
 import { Button, ButtonText, Loader } from "../../components";
 
 import { Music } from "./Music/Music";
@@ -12,7 +16,7 @@ import { Progress } from "./Progress/Progress";
 import { GameLayout } from "./GameLayout";
 
 export const Game: React.FC = () => {
-  const [tracks, setTracks] = useState<Track[]>([]);
+  const [tracks, setTracks] = useState<ITrack[]>([]);
   const [mp3, setMp3] = useState("");
   const [isMp3Loading, setMp3Loading] = useState(false);
 
@@ -25,10 +29,10 @@ export const Game: React.FC = () => {
 
   const play = useCallback(() => {
     if (isEnd) {
-      setScreen(Screen.RESULT);
+      setScreen(GameScreen.RESULT);
     } else {
       ws.next().then((r) =>
-        r.once("nextTracks", ({ tracks, mp3 }: WsAnswerNext) => {
+        r.once("nextTracks", ({ tracks, mp3 }: IWsAnswerNext) => {
           setMp3Loading(true);
           setTracks(tracks);
           setMp3(mp3);

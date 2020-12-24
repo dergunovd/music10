@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import {
+  GameContext,
+  GameScreen,
+  NetworkContextProvider,
+} from '@dergunovd/music10';
 
-import { GameContext, Screen } from '../../contexts';
-import { NetworkContextProvider } from '../../components';
 import { Game } from './Game';
 
 describe('Game', () => {
@@ -14,7 +17,7 @@ describe('Game', () => {
       <NetworkContextProvider>
         <GameContext.Provider
           value={{
-            screen: Screen.PLAYLIST,
+            screen: GameScreen.PLAYLIST,
             setScreen,
             result: { progress: [], isEnd: false },
             setResult,

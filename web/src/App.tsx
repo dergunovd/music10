@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { NetworkContextProvider } from './components';
+import {
+  IResult,
+  GameContext,
+  IGameState,
+  GameScreen,
+  NetworkContextProvider,
+} from '@dergunovd/music10';
 
-import { GameContext, GameState, Screen } from './contexts';
 import { Game, Playlists, Result as ResultScreen } from './pages';
-import { Result } from './utils';
 
 const App = () => {
-  const [screen, setScreen] = useState<Screen>(Screen.PLAYLIST);
-  const [result, setResult] = useState<Result>({} as Result);
-  const [gameState, setGameState] = useState<GameState>({} as GameState);
+  const [screen, setScreen] = useState<GameScreen>(GameScreen.PLAYLIST);
+  const [result, setResult] = useState<IResult>({} as IResult);
+  const [gameState, setGameState] = useState<IGameState>({} as IGameState);
 
   return (
     <NetworkContextProvider>
@@ -22,9 +26,9 @@ const App = () => {
           setGameState,
         }}
       >
-        {screen === Screen.PLAYLIST && <Playlists />}
-        {screen === Screen.GAME && <Game />}
-        {screen === Screen.RESULT && <ResultScreen />}
+        {screen === GameScreen.PLAYLIST && <Playlists />}
+        {screen === GameScreen.GAME && <Game />}
+        {screen === GameScreen.RESULT && <ResultScreen />}
       </GameContext.Provider>
     </NetworkContextProvider>
   );

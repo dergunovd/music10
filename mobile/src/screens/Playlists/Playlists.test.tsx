@@ -1,20 +1,24 @@
 import React from "react";
 import { act, fireEvent, render } from "@testing-library/react-native";
-import { QueryClient, QueryClientProvider } from "react-query";
+import {
+  Api,
+  WS,
+  GameContext,
+  GameScreen,
+  PLAYLISTS_MOCK,
+  NetworkContextProvider,
+} from "@dergunovd/music10";
 
-import { Api, WS } from "../../utils";
-import { ApiContext, GameContext, Screen, WsContext } from "../../contexts";
-import { PLAYLISTS } from "../../mocks";
 import { Playlists } from "./Playlists";
-import { NetworkContextProvider } from "../../components";
 
 describe("Playlists", () => {
   const api = new Api();
   const ws = new WS();
-  const queryClient = new QueryClient();
 
   beforeEach(async () => {
-    jest.spyOn(api, "getPlaylists").mockImplementation(async () => PLAYLISTS);
+    jest
+      .spyOn(api, "getPlaylists")
+      .mockImplementation(async () => PLAYLISTS_MOCK);
     jest.spyOn(ws, "setPlaylist");
   });
 
@@ -41,7 +45,7 @@ describe("Playlists", () => {
         <NetworkContextProvider api={api} ws={ws}>
           <GameContext.Provider
             value={{
-              screen: Screen.PLAYLIST,
+              screen: GameScreen.PLAYLIST,
               setScreen,
               result: { progress: [], isEnd: false },
               setResult,
@@ -57,9 +61,9 @@ describe("Playlists", () => {
       await fireEvent.press(screen.getAllByRole("button")[0]);
       expect(setScreen).toHaveBeenCalled();
       expect(setScreen).toBeCalledTimes(1);
-      expect(setScreen).toBeCalledWith(Screen.GAME);
+      expect(setScreen).toBeCalledWith(GameScreen.GAME);
       expect(ws.setPlaylist).toBeCalledTimes(1);
-      expect(ws.setPlaylist).toBeCalledWith(PLAYLISTS[0].id);
+      expect(ws.setPlaylist).toBeCalledWith(PLAYLISTS_MOCK[0].id);
     });
   });
 });

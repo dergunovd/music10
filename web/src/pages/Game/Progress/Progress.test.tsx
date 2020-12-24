@@ -3,8 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import { Progress } from './Progress';
-import { GameContext, Screen } from '../../../contexts';
-import { PROGRESS } from '../../../mocks';
+import { GameContext, GameScreen, PROGRESS_MOCK } from '@dergunovd/music10';
 import { ProgressBarItemVariant } from '../../../components';
 
 describe('Progress', () => {
@@ -17,9 +16,9 @@ describe('Progress', () => {
       render(
         <GameContext.Provider
           value={{
-            screen: Screen.PLAYLIST,
+            screen: GameScreen.PLAYLIST,
             setScreen,
-            result: { progress: PROGRESS, isEnd: false },
+            result: { progress: PROGRESS_MOCK, isEnd: false },
             setResult,
             gameState: { isSelectTrack: false, playlistName: '' },
             setGameState,
