@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 
-import { GameContext, WsContext } from '../../contexts';
+import { GameContext, Screen, WsContext } from '../../contexts';
 import { Button, Header, Loader } from '../../components';
 import { WsAnswerNext } from '../../utils';
 import { Track } from '../../interfaces';
@@ -17,17 +17,23 @@ export const Game: React.FC = () => {
   const ws = useContext(WsContext);
   const {
     gameState: { isSelectTrack },
+    result: { isEnd },
+    setScreen,
   } = useContext(GameContext);
 
   const play = useCallback(() => {
-    ws.next().then((r) =>
-      r.once('nextTracks', ({ tracks, mp3 }: WsAnswerNext) => {
-        setMp3Loading(true);
-        setTracks(tracks);
-        setMp3(mp3);
-      }),
-    );
-  }, []);
+    if (isEnd) {
+      setScreen(Screen.RESULT);
+    } else {
+      ws.next().then((r) =>
+        r.once('nextTracks', ({ tracks, mp3 }: WsAnswerNext) => {
+          setMp3Loading(true);
+          setTracks(tracks);
+          setMp3(mp3);
+        }),
+      );
+    }
+  }, [setScreen, isEnd, setMp3Loading, setTracks, setMp3]);
 
   return (
     <>

@@ -8,6 +8,7 @@ import { ProgressBarItem, ProgressBarItemVariant } from './ProgressBarItem';
 export interface ProgressBarProps {
   progress: boolean[];
   vertical?: boolean;
+  isSelectTrack?: boolean;
 }
 
 export const StyledProgressBar = styled.ul<Omit<ProgressBarProps, 'progress'>>`
@@ -39,6 +40,7 @@ export const StyledProgressBar = styled.ul<Omit<ProgressBarProps, 'progress'>>`
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   progress = [],
+  isSelectTrack,
   ...props
 }) => (
   <StyledProgressBar {...props} role="progressbar">
@@ -50,13 +52,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         }
       />
     ))}
-    {progress.length < TRACKS_PER_ROUND ? (
+    {progress.length < TRACKS_PER_ROUND && !isSelectTrack ? (
       <ProgressBarItem
         variant={ProgressBarItemVariant.Current}
         key={progress.length}
       />
     ) : null}
-    {new Array(Math.max(TRACKS_PER_ROUND - progress.length - 1, 0))
+    {new Array(
+      Math.max(TRACKS_PER_ROUND - progress.length - +!isSelectTrack, 0),
+    )
       .fill(true)
       .map((_, index) => (
         <ProgressBarItem

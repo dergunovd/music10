@@ -1,14 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
-import { GameContext, Screen } from "../../../contexts";
+import { GameContext } from "../../../contexts";
 import { ProgressBar } from "../../../components";
 
 export const Progress: React.FC = () => {
-  const { result, screen, setScreen } = useContext(GameContext);
+  const {
+    result: { progress },
+    gameState: { isSelectTrack },
+  } = useContext(GameContext);
 
-  useEffect(() => {
-    if (result.isEnd && screen !== Screen.RESULT) setScreen(Screen.RESULT);
-  });
-
-  return <ProgressBar progress={result.progress} />;
+  return <ProgressBar progress={progress} isSelectTrack={isSelectTrack} />;
 };
