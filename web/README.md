@@ -15,7 +15,7 @@ TODO
 * _build-storybook_ - Build Storybook
 * _deploy_ - Deploy build
 * _deploy:doc_ - Deploy Storybook
-* _deploy:coverage_ - Deploy test-coverage result
+* _deploy:coverage_ - Deploy test coverage report
 
 ### Local Run
 `npm install`

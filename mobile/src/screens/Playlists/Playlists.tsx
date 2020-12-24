@@ -5,13 +5,11 @@ import { Playlist } from "../../interfaces";
 import { ApiContext, GameContext, Screen, WsContext } from "../../contexts";
 import {
   Button,
-  Header,
   PlaylistGrid,
   Loader,
   ErrorMessage,
   ButtonText,
 } from "../../components";
-import { View } from "react-native";
 
 export const Playlists: React.FC = () => {
   const api = useContext(ApiContext);
@@ -31,8 +29,7 @@ export const Playlists: React.FC = () => {
   );
 
   return (
-    <View>
-      <Header text="Выберите плейлист" />
+    <>
       {isLoading && <Loader />}
       {isError && <ErrorMessage>Ошибка: {error?.message}</ErrorMessage>}
       {isSuccess && (
@@ -44,6 +41,6 @@ export const Playlists: React.FC = () => {
           ))}
         </PlaylistGrid>
       )}
-    </View>
+    </>
   );
 };

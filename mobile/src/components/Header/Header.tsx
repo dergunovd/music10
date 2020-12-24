@@ -1,19 +1,9 @@
 import React from "react";
-import { Text, View, ViewProps } from "react-native";
-import {
-  HeaderLogo,
-  HeaderNav,
-  HeaderTitle,
-  StyledHeader,
-} from "./Header.styled";
+import { Text, View } from "react-native";
+import { HeaderLogo, StyledHeader } from "./Header.styled";
 import { css } from "@emotion/native";
 
-export interface HeaderProps extends ViewProps {
-  text: string;
-  nav?: Array<React.ReactNodeArray>;
-}
-
-export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
+export const Header: React.FC = (props) => (
   <StyledHeader {...props}>
     <HeaderLogo>
       <View
@@ -52,7 +42,5 @@ export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => (
         </Text>
       </View>
     </HeaderLogo>
-    <HeaderTitle>{text}</HeaderTitle>
-    <HeaderNav>{nav}</HeaderNav>
   </StyledHeader>
 );

@@ -8,14 +8,16 @@ TODO
 
 - _android_ - Run application on Android Device/Emulator
 - _android:release_ - Run application on Android Device/Emulator in release-mode
-- _ios_ - Run application on Android Device/Emulator
+- _build:android:release_ - Build Android in release-mode
+- _ios_ - Run application on iOS Device/Emulator
 - _start_ - Run react-native project
 - _test_ - Test application using Jest
 - _test:cov_ - Test application using Jest with coverage
 - _lint_ - Lint sources using eslint
 - _lint:fix_ - Lint sources using eslint with autofix
 - _format_ - Format sources application using prettier
-- _clear_ - Remove previous build artifact
+- _deploy:apk_ - Deploy APK file
+- _deploy:coverage_ - Deploy test coverage report
 
 ### Local run
 * [Environment setup](https://reactnative.dev/docs/environment-setup)
@@ -29,4 +31,7 @@ TODO
 
 ### Possible problems
 > com.android.builder.testing.api.DeviceException: com.android.ddmlib.InstallException: INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package com.mobilenative signatures do not match previously installed version; ignoring!
+* `adb uninstall com.mobilenative`
 * Remove application from Device
+* Remove  *android/app/build* directory
+* Run `gradlew clean` from *android* directory
