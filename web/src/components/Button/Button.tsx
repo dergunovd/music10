@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { accent, bg, main } from '../../utils';
+import { Colors } from '@dergunovd/music10';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,9 +19,9 @@ export const Button = styled.button<ButtonProps>`
   ${({ primary }) =>
     primary
       ? css`
-          border: 2px solid ${accent};
-          color: ${bg};
-          background: ${accent};
+          border: 2px solid ${Colors.accent};
+          color: ${Colors.bg};
+          background: ${Colors.accent};
           &:hover:before {
              content: '';
              position: absolute;
@@ -30,24 +30,24 @@ export const Button = styled.button<ButtonProps>`
              display: block;
              width: 100%;
              height: 100%;
-             border: 4px solid ${main};
+             border: 4px solid ${Colors.main};
              z-index: -1;
            }
          }
         `
       : css`
-          border: 2px solid ${main};
-          color: ${main};
+          border: 2px solid ${Colors.main};
+          color: ${Colors.main};
           background: transparent;
           &:hover {
             transition: all 0.3s ease-in-out;
-            border-color: ${accent};
+            border-color: ${Colors.accent};
           }
         `}
   &:disabled {
     opacity: 0.7;
-    border: 2px solid ${main};
-    color: ${main};
+    border: 2px solid ${Colors.main};
+    color: ${Colors.main};
     background: transparent;
     cursor: not-allowed;
 

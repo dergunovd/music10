@@ -1,11 +1,15 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, screen, waitFor } from '@testing-library/react';
+import {
+  GameContext,
+  GameScreen,
+  WsContext,
+  WS,
+  PROGRESS_MOCK,
+} from '@dergunovd/music10';
 
-import { GameContext, Screen, WsContext } from '../../contexts';
-import { PROGRESS } from '../../mocks';
 import { Result } from './Result';
-import { WS } from '../../utils';
 
 describe('Result', () => {
   const ws = new WS();
@@ -18,9 +22,9 @@ describe('Result', () => {
         <WsContext.Provider value={ws}>
           <GameContext.Provider
             value={{
-              screen: Screen.PLAYLIST,
+              screen: GameScreen.PLAYLIST,
               setScreen,
-              result: { progress: PROGRESS, isEnd: true },
+              result: { progress: PROGRESS_MOCK, isEnd: true },
               setResult,
               gameState: { isSelectTrack: false, playlistName: '' },
               setGameState,
@@ -42,9 +46,9 @@ describe('Result', () => {
         <WsContext.Provider value={ws}>
           <GameContext.Provider
             value={{
-              screen: Screen.RESULT,
+              screen: GameScreen.RESULT,
               setScreen,
-              result: { progress: PROGRESS, isEnd: true },
+              result: { progress: PROGRESS_MOCK, isEnd: true },
               setResult,
               gameState: { isSelectTrack: false, playlistName: '' },
               setGameState,
@@ -57,7 +61,7 @@ describe('Result', () => {
     });
     screen.getByRole('button').click();
     expect(setScreen).toHaveBeenCalledTimes(1);
-    expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
+    expect(setScreen).toHaveBeenCalledWith(GameScreen.PLAYLIST);
     expect(setResult).toHaveBeenCalledTimes(1);
     expect(setResult).toHaveBeenCalledWith({ isEnd: false, progress: [] });
   });

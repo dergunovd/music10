@@ -1,9 +1,8 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
+import { GameContext, GameScreen, PROGRESS_MOCK } from "@dergunovd/music10";
 
-import { GameContext, Screen } from "../../contexts";
 import { Result } from "./Result";
-import { PROGRESS } from "../../mocks";
 
 describe("Result", () => {
   const setScreen = jest.fn();
@@ -14,9 +13,9 @@ describe("Result", () => {
     const screen = render(
       <GameContext.Provider
         value={{
-          screen: Screen.RESULT,
+          screen: GameScreen.RESULT,
           setScreen,
-          result: { progress: PROGRESS, isEnd: true },
+          result: { progress: PROGRESS_MOCK, isEnd: true },
           setResult,
           gameState: { isSelectTrack: false, playlistName: "" },
           setGameState,
@@ -33,9 +32,9 @@ describe("Result", () => {
     const screen = render(
       <GameContext.Provider
         value={{
-          screen: Screen.RESULT,
+          screen: GameScreen.RESULT,
           setScreen,
-          result: { progress: PROGRESS, isEnd: true },
+          result: { progress: PROGRESS_MOCK, isEnd: true },
           setResult,
           gameState: { isSelectTrack: false, playlistName: "" },
           setGameState,
@@ -47,6 +46,6 @@ describe("Result", () => {
     fireEvent.press(screen.getByRole("button"));
 
     expect(setScreen).toHaveBeenCalledTimes(1);
-    expect(setScreen).toHaveBeenCalledWith(Screen.PLAYLIST);
+    expect(setScreen).toHaveBeenCalledWith(GameScreen.PLAYLIST);
   });
 });

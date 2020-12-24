@@ -1,6 +1,6 @@
 import styled, { css } from "@emotion/native";
+import { Colors } from "@dergunovd/music10";
 
-import { accent, danger, main } from "../../utils";
 import { TrackCardProps, TrackCardVariant } from "./Track.types";
 
 export const StyledTrack = styled.Pressable<TrackCardProps>`
@@ -10,20 +10,20 @@ export const StyledTrack = styled.Pressable<TrackCardProps>`
   font-weight: 700;
   position: relative;
   text-align: center;
-  border: 2px solid ${main};
+  border: 2px solid ${Colors.main};
   & + & {
     margin-top: 12px;
   }
   ${({ type }) =>
     type === TrackCardVariant.Success
       ? css`
-          border: 2px solid ${accent};
-          color: ${accent};
+          border: 2px solid ${Colors.accent};
+          color: ${Colors.accent};
         `
       : type === TrackCardVariant.Wrong
       ? css`
-          border: 2px solid ${danger};
-          color: ${danger};
+          border: 2px solid ${Colors.danger};
+          color: ${Colors.danger};
         `
       : css``}
 `;
@@ -32,14 +32,14 @@ export const TrackName = styled.Text`
   font-size: 18px;
   font-weight: 700;
   text-align: center;
-  color: ${main};
+  color: ${Colors.main};
 `;
 
 export const TrackAuthor = styled.Text`
   margin-top: 16px;
   font-size: 16px;
   font-weight: 500;
-  color: ${main};
+  color: ${Colors.main};
   text-align: center;
   opacity: 0.7;
 `;

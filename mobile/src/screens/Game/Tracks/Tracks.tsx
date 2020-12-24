@@ -1,12 +1,15 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import {
+  WsContext,
+  GameContext,
+  ITrack,
+  IWsAnswerChoose,
+} from "@dergunovd/music10";
 
-import { Track as TrackInterface } from "../../../interfaces";
-import { WsContext, GameContext } from "../../../contexts";
-import { WsAnswerChoose } from "../../../utils";
 import { Track, TrackCardVariant, TracksGrid } from "../../../components";
 
 interface Props {
-  tracks: TrackInterface[];
+  tracks: ITrack[];
 }
 
 export const Tracks: React.FC<Props> = ({ tracks }) => {
@@ -26,7 +29,7 @@ export const Tracks: React.FC<Props> = ({ tracks }) => {
       setSelected(trackId);
       setGameState({ ...gameState, isSelectTrack: true });
       ws.choose(trackId).then((socket) =>
-        socket.once("chooseResult", ({ correct, result }: WsAnswerChoose) => {
+        socket.once("chooseResult", ({ correct, result }: IWsAnswerChoose) => {
           setCorrect(correct);
           setResult(result);
         })

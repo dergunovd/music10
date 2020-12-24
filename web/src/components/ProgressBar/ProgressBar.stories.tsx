@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
+import { PROGRESS_MOCK } from '@dergunovd/music10';
 
 import { ProgressBar, ProgressBarProps } from './ProgressBar';
-import { PROGRESS } from '../../mocks';
 
 export default {
   title: 'Components/ProgressBar',
@@ -11,27 +11,23 @@ export default {
 
 const Template = (props: ProgressBarProps) => <ProgressBar {...props} />;
 
-export const Default = Template.bind({
-  progress: PROGRESS,
-  isSelectTrack: false,
-});
+export const Default = Template.bind({ progress: PROGRESS_MOCK });
 /* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
-Default.args = { progress: PROGRESS, isSelectTrack: false };
+Default.args = { progress: PROGRESS_MOCK };
 
 export const SelectTrack = Template.bind({
-  progress: PROGRESS,
+  progress: PROGRESS_MOCK,
   isSelectTrack: true,
 });
 /* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
-SelectTrack.args = { progress: PROGRESS, isSelectTrack: true };
+SelectTrack.args = { progress: PROGRESS_MOCK, isSelectTrack: true };
 
 export const Vertical = Template.bind({
   vertical: true,
-  progress: PROGRESS,
-  isSelectTrack: false,
+  progress: PROGRESS_MOCK,
 });
 /* eslint-disable @typescript-eslint/ban-ts-comment*/
 // @ts-ignore
-Vertical.args = { progress: PROGRESS, vertical: true, isSelectTrack: false };
+Vertical.args = { progress: PROGRESS_MOCK, vertical: true };

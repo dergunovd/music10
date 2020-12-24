@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
+import { GameContext } from "@dergunovd/music10";
 
-import { GameContext } from "../../../contexts";
 import { ProgressBar } from "../../../components";
 
 export const Progress: React.FC = () => {

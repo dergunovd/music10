@@ -1,11 +1,12 @@
 import React, { useCallback, useContext } from 'react';
+import { GameContext, GameScreen, WsContext } from '@dergunovd/music10';
+
 import {
   HeaderLogo,
   HeaderNav,
   HeaderTitle,
   StyledHeader,
 } from './Header.styled';
-import { GameContext, Screen, WsContext } from '../../contexts';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   text: string;
@@ -18,7 +19,7 @@ export const Header: React.FC<HeaderProps> = ({ text, nav = [], ...props }) => {
 
   const goToStart = useCallback(async () => {
     setResult({ isEnd: false, progress: [] });
-    setScreen(Screen.PLAYLIST);
+    setScreen(GameScreen.PLAYLIST);
     await ws.reconnect();
   }, []);
 

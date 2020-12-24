@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { accent, bg, main } from '../../utils';
+import { Colors } from '@dergunovd/music10';
 
 export const StyledHeader = styled.header`
   width: 100%;
@@ -13,20 +13,20 @@ export const StyledHeader = styled.header`
 export const HeaderLogo = styled.div`
   padding: 2rem 5rem;
   font-size: 2rem;
-  background: ${accent};
-  color: ${bg};
+  background: ${Colors.accent};
+  color: ${Colors.bg};
   font-weight: 700;
   cursor: pointer;
 `;
 export const HeaderTitle = styled.h2`
   display: none;
   text-align: center;
-  color: ${main};
+  color: ${Colors.main};
 `;
 
 export const HeaderNav = styled.nav`
   text-align: right;
-  color: ${main};
+  color: ${Colors.main};
   & > * + * {
     margin-left: 2rem;
   }

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
+import { GameContext, GameScreen, WsContext } from '@dergunovd/music10';
 
-import { GameContext, Screen, WsContext } from '../../contexts';
 import { Button, Header } from '../../components';
 import { ResultLayout } from './ResultLayout';
 import { Progress } from '../Game/Progress/Progress';
@@ -11,7 +11,7 @@ export const Result: React.FC = () => {
 
   const replay = useCallback(async () => {
     setResult({ isEnd: false, progress: [] });
-    setScreen(Screen.PLAYLIST);
+    setScreen(GameScreen.PLAYLIST);
     await ws.reconnect();
   }, [setResult, setScreen, ws]);
 

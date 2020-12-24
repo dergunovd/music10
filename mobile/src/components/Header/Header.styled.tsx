@@ -1,6 +1,5 @@
 import styled from "@emotion/native";
-
-import { accent, bg } from "../../utils";
+import { Colors } from "@dergunovd/music10";
 
 export const StyledHeader = styled.View`
   display: flex;
@@ -16,7 +15,7 @@ export const HeaderLogo = styled.Pressable`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: ${accent};
-  color: ${bg};
+  background: ${Colors.accent};
+  color: ${Colors.bg};
   font-weight: 700;
 `;

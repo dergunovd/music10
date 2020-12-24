@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "@emotion/native";
 import { ActivityIndicator } from "react-native";
-
-import { accent } from "../../utils";
+import { Colors } from "@dergunovd/music10";
 
 const StyledLoader = styled.View`
   width: 200px;
@@ -12,6 +11,6 @@ const StyledLoader = styled.View`
 
 export const Loader: React.FC = () => (
   <StyledLoader>
-    <ActivityIndicator size="large" color={accent} />
+    <ActivityIndicator size="large" color={Colors.accent} />
   </StyledLoader>
 );
