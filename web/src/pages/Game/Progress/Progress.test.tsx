@@ -45,26 +45,4 @@ describe('Progress', () => {
       ProgressBarItemVariant.Default,
     );
   });
-
-  it('Should go to result screen', async () => {
-    act(() => {
-      render(
-        <GameContext.Provider
-          value={{
-            screen: Screen.PLAYLIST,
-            setScreen,
-            result: { progress: PROGRESS, isEnd: true },
-            setResult,
-            gameState: { isSelectTrack: false, playlistName: '' },
-            setGameState,
-          }}
-        >
-          <Progress />
-        </GameContext.Provider>,
-      );
-    });
-    await waitFor(() => expect(setScreen).toHaveBeenCalled());
-    expect(setScreen).toHaveBeenCalledTimes(1);
-    expect(setScreen).toHaveBeenCalledWith(Screen.RESULT);
-  });
 });

@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useState } from "react";
 import { ScrollView } from "react-native";
 
-import { GameContext, WsContext } from "../../contexts";
+import { GameContext, WsContext, Screen } from "../../contexts";
 import { WsAnswerNext } from "../../utils";
 import { Track } from "../../interfaces";
 import { Button, ButtonText, Loader } from "../../components";
+
 import { Music } from "./Music/Music";
 import { Tracks } from "./Tracks/Tracks";
 import { Progress } from "./Progress/Progress";
@@ -18,17 +19,23 @@ export const Game: React.FC = () => {
   const ws = useContext(WsContext);
   const {
     gameState: { isSelectTrack },
+    result: { isEnd },
+    setScreen,
   } = useContext(GameContext);
 
   const play = useCallback(() => {
-    ws.next().then((r) =>
-      r.once("nextTracks", ({ tracks, mp3 }: WsAnswerNext) => {
-        setMp3Loading(true);
-        setTracks(tracks);
-        setMp3(mp3);
-      })
-    );
-  }, []);
+    if (isEnd) {
+      setScreen(Screen.RESULT);
+    } else {
+      ws.next().then((r) =>
+        r.once("nextTracks", ({ tracks, mp3 }: WsAnswerNext) => {
+          setMp3Loading(true);
+          setTracks(tracks);
+          setMp3(mp3);
+        })
+      );
+    }
+  }, [setScreen, isEnd, setMp3Loading, setTracks, setMp3]);
 
   return (
     <ScrollView>
