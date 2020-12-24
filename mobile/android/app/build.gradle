@@ -150,7 +150,7 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-         release {
+        release {
             if (project.hasProperty('MUSIC10_UPLOAD_STORE_FILE')) {
                 storeFile file(MUSIC10_UPLOAD_STORE_FILE)
                 storePassword MUSIC10_UPLOAD_STORE_PASSWORD
