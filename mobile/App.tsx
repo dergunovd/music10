@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     AppMetrica.activate({
-      apiKey: "6feff3e2-24e0-462c-a7f3-017a380edfb6",
+      apiKey: "",
       sessionTimeout: 120,
       firstActivationAsUpdate: true,
     });

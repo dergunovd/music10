@@ -25,6 +25,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.AUTH_TOKEN_GITHUB }}" > ~/.npmrc
       - name: Install Dependencies
         run: cd mobile && npm install
       - name: Lint

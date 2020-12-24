@@ -13,8 +13,8 @@ export const NetworkContextProvider: React.FC<NetworkContextProviderProps> = ({
   api,
   ws,
 }) => {
-  const apiValue = useMemo(() => api || new Api(), []);
-  const wsValue = useMemo(() => ws || new WS(), []);
+  const apiValue = useMemo(() => api || new Api(), [api]);
+  const wsValue = useMemo(() => ws || new WS(), [ws]);
   const queryClient = useMemo(() => new QueryClient(), []);
 
   return (
