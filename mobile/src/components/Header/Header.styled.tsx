@@ -1,6 +1,6 @@
 import styled from "@emotion/native";
 
-import { accent, bg, main } from "../../utils";
+import { accent, bg } from "../../utils";
 
 export const StyledHeader = styled.View`
   display: flex;
@@ -19,17 +19,4 @@ export const HeaderLogo = styled.View`
   background: ${accent};
   color: ${bg};
   font-weight: 700;
-`;
-export const HeaderTitle = styled.Text`
-  display: none;
-  text-align: center;
-  color: ${main};
-`;
-
-export const HeaderNav = styled.View`
-  text-align: right;
-  color: ${main};
-  & > * + * {
-    margin-left: 24px;
-  }
 `;
