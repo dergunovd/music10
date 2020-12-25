@@ -3,7 +3,7 @@ import { Track } from '../../src/interfaces';
 /**
  * Example of tracks array
  */
-export const TRACKS: Track[] = [
+export const TRACKS_MOCK: Track[] = [
   {
     id: 92007768,
     name: 'Вокруг шум',

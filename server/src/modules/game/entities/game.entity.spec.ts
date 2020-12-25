@@ -1,5 +1,5 @@
 import { Game } from './game.entity';
-import { PLAYLIST } from '../../../../test/mocks/playlist';
+import { PLAYLIST_MOCK } from '../../../../__tests__/mocks/playlist';
 
 describe('Game', () => {
   let gameInstance: Game;
@@ -14,12 +14,12 @@ describe('Game', () => {
   });
 
   it('Should set playlist', () => {
-    gameInstance.setPlaylist(PLAYLIST);
+    gameInstance.setPlaylist(PLAYLIST_MOCK);
     expect(gameInstance.result).toBeDefined();
   });
 
   it('Should get next', async () => {
-    gameInstance.setPlaylist(PLAYLIST);
+    gameInstance.setPlaylist(PLAYLIST_MOCK);
     const nextTracks = await gameInstance.next();
 
     expect(gameInstance.displayedTracks).toBeDefined();
@@ -34,7 +34,7 @@ describe('Game', () => {
   });
 
   it('Should choose', async () => {
-    gameInstance.setPlaylist(PLAYLIST);
+    gameInstance.setPlaylist(PLAYLIST_MOCK);
     await gameInstance.next();
     const result = gameInstance.choose(3);
     expect(gameInstance.result.progress).toHaveLength(1);

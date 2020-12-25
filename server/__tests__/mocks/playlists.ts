@@ -1,7 +1,7 @@
 /**
  * Example of playlists array
  */
-export const PLAYLISTS = [
+export const PLAYLISTS_MOCK = [
   { id: 6536346784, name: 'Русский рэп' },
   { id: 6536456504, name: 'Русское' },
   { id: 6538130744, name: 'Рок Легенды' },

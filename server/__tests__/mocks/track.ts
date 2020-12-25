@@ -1,7 +1,7 @@
 /**
  * Example of track
  */
-export const TRACK = {
+export const TRACK_MOCK = {
   id: 92007768,
   name: 'Вокруг шум',
   author: 'Каста',
