@@ -6,7 +6,7 @@ import { DeezerApiModule } from '../deezer-api';
 import { Socket } from 'socket.io';
 import { Game } from './entities/game.entity';
 import { PlaylistsService } from '../playlists/playlists.service';
-import { PLAYLIST } from '../../../test/mocks/playlist';
+import { PLAYLIST_MOCK } from '../../../__tests__/mocks/playlist';
 
 const MOCK_SOCKET: Socket = {
   id: '123456',
@@ -33,7 +33,7 @@ describe('GameGateway', () => {
     spyOn(service, 'addClient');
     spyOn(service, 'removeClient');
     spyOn(service, 'getClient').and.returnValue(game);
-    spyOn(playlistService, 'getPlaylist').and.returnValue(PLAYLIST);
+    spyOn(playlistService, 'getPlaylist').and.returnValue(PLAYLIST_MOCK);
     spyOn(game, 'setPlaylist');
     spyOn(game, 'next');
     spyOn(game, 'choose');
