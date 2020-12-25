@@ -29,10 +29,8 @@ jobs:
       run: cd server && npm install
     - name: Lint
       run: cd server && npm run lint
-    - name: Test
-      run: cd server && npm run test:cov
-    - name: Store code coverage results
-      uses: actions/upload-artifact@v2
-      with:
-        name: code-coverage-report
-        path: server/coverage
+    - name: Unit Test
+      run: cd server && npm run test
+    - name: e2e Test
+      run: cd server && npm run test:e2e
+

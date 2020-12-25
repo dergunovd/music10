@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { PLAYLISTS } from './mocks/playlists';
 
-describe('AppController (e2e)', () => {
+describe('PlaylistsController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,10 +16,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/playlists (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/playlists')
       .expect(200)
-      .expect('Hello World!');
+      .expect(PLAYLISTS);
   });
 });

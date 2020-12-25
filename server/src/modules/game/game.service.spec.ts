@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GameService } from './game.service';
-import { PlaylistsModule } from '../playlists/playlists.module';
+import { PlaylistsModule } from '../playlists';
 import { DeezerApiModule } from '../deezer-api';
 import { Game } from './entities/game.entity';
 
