@@ -32,13 +32,4 @@ jobs:
       - name: Lint
         run: cd web && npm run lint
       - name: Test
-        run: cd web && npm run test:cov
-      - name: Build
-        run: cd web && npm build
-        env:
-          REACT_APP_SERVER_HOST: ${{ secrets.REACT_APP_SERVER_HOST }}
-      - name: Store dist
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: web/build
+        run: cd web && npm run test
