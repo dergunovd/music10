@@ -2,7 +2,7 @@
   "name": "@dergunovd/music10",
   "author": "Dmitry Dergunov <dmitry@dergunov.net>",
   "module": "ui-common.esm.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "main": "index.js",
   "typings": "index.d.ts",
